@@ -8,17 +8,15 @@ public class Partida {
 	private Tablero tablero;
 	private ArrayList<Jugador> jugadores;
 	private static final int MAXJUGADORES = 8;
-	
-	public int getDados(){
+
+	public int getDados() {
 		
 		return 0;
 	}
-	
+
 	public boolean dadosIguales() {
-		
+
 		return true;
 	}
-	
-	
-	
+
 }

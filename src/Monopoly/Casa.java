@@ -6,18 +6,16 @@ import java.awt.Image;
 public class Casa extends Casilla {
 	private Color color;
 	private double precio_compra;
-	private double precio_venta ;
-	
-	
-	
-	
-	public Casa(int numero, String nombre, Image fondo,Color c,double compra , double venta) {
+	private double precio_venta;
+
+	public Casa(int numero, String nombre, Image fondo, Color c, double compra, double venta) {
 		super(numero, nombre, fondo);
-		this.color=c;
-		this.precio_compra=compra;
-		this.precio_venta=venta;
-		
+		this.color = c;
+		this.precio_compra = compra;
+		this.precio_venta = venta;
+
 	}
+
 	public Color getColor() {
 		return color;
 	}
@@ -41,9 +39,5 @@ public class Casa extends Casilla {
 	public void setPrecio_venta(double precio_venta) {
 		this.precio_venta = precio_venta;
 	}
-
-	
-	
-	
 
 }

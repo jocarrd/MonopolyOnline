@@ -49,10 +49,10 @@ public class Jugador {
 	}
 
 	public void movimiento_tablero(int c) {
-		if(this.posicion_tablero+c>=Tablero.tam) {
-			this.posicion_tablero=(this.posicion_tablero+c)-Tablero.tam;
+		if (this.posicion_tablero + c >= Tablero.tam) {
+			this.posicion_tablero = (this.posicion_tablero + c) - Tablero.tam;
 		}
-		
+
 		this.posicion_tablero = this.posicion_tablero + c;
 	}
 
