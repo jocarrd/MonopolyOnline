@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Jugador {
 	private String nombre;
-	private List<Casa> propiedades;
+	private List<Calle> propiedades;
 	private double dinero;
 	private int posicion_tablero;
 
@@ -56,7 +56,7 @@ public class Jugador {
 		this.posicion_tablero = this.posicion_tablero + c;
 	}
 
-	public boolean anadir_propiedad(Casa c) {
+	public boolean anadir_propiedad(Calle c) {
 
 		if (this.propiedades.contains(c) == false) {
 			this.propiedades.add(c);
@@ -66,7 +66,7 @@ public class Jugador {
 
 	}
 
-	public boolean eliminar_propiedad(Casa c) {
+	public boolean eliminar_propiedad(Calle c) {
 
 		if (this.propiedades.contains(c) == true) {
 			this.propiedades.remove(c);

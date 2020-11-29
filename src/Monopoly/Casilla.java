@@ -8,14 +8,18 @@ public class Casilla {
 	private int numero;
 	private String nombre;
 	private List<Jugador> estan;
-	private Image fondo;
+	private TipoCasilla tipoCasilla;
+	//private Image fondo;
 
-	public Casilla(int numero, String nombre, Image fondo) {
+	
+	public Casilla(int numero, String nombre, TipoCasilla t) {
 		this.numero = numero;
 		this.nombre = nombre;
-		this.fondo = fondo;
-		this.estan = new ArrayList<>();
+		this.tipoCasilla = t;
+		//this.fondo = fondo;
+		//this.estan = new ArrayList<>();
 	}
+	
 
 	public String getNombre() {
 		return nombre;
@@ -25,13 +29,13 @@ public class Casilla {
 		this.nombre = nombre;
 	}
 
-	public Image getFondo() {
-		return fondo;
-	}
-
-	public void setFondo(Image fondo) {
-		this.fondo = fondo;
-	}
+//	public Image getFondo() {
+//		return fondo;
+//	}
+//
+//	public void setFondo(Image fondo) {
+//		this.fondo = fondo;
+//	}
 
 	public boolean anadir_jugador_casilla(Jugador c) {
 		if (!this.estan.contains(c)) {
@@ -48,6 +52,14 @@ public class Casilla {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+	
+	public TipoCasilla getTipoCasilla() {
+		return this.tipoCasilla;
+	}
+	
+	public void setTipoCasilla(TipoCasilla t) {
+		this.tipoCasilla = t;
 	}
 
 }

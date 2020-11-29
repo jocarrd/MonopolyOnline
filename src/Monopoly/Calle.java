@@ -3,13 +3,13 @@ package Monopoly;
 import java.awt.Color;
 import java.awt.Image;
 
-public class Casa extends Casilla {
+public class Calle extends Casilla {
 	private Color color;
 	private double precio_compra;
 	private double precio_venta;
 
-	public Casa(int numero, String nombre, Image fondo, Color c, double compra, double venta) {
-		super(numero, nombre, fondo);
+	public Calle(int numero, String nombre, Color c, double compra, double venta) {
+		super(numero, nombre, TipoCasilla.calle);
 		this.color = c;
 		this.precio_compra = compra;
 		this.precio_venta = venta;
