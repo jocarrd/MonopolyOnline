@@ -7,8 +7,8 @@ public class Calle extends Casilla {
 	private Color color;
 	private double precio_compra;
 	private double alquiler;
-	private boolean tienePropietario = false;
-	//private double precio_venta;  yo lo llamaria alquiler
+	private boolean tienePropietario ;
+	
 
 
 	public Calle(int numero, String nombre, Color c, double compra, double venta, boolean tienePropietario) {
@@ -17,7 +17,7 @@ public class Calle extends Casilla {
 		this.precio_compra = compra;
 		this.alquiler = venta;
 		this.tienePropietario = tienePropietario;
-		//this.precio_venta = venta;
+		
 
 	}
 

@@ -17,7 +17,7 @@ public class Casilla {
 		this.nombre = nombre;
 		this.tipoCasilla = t;
 		//this.fondo = fondo;
-		//this.estan = new ArrayList<>();
+		this.estan = new ArrayList<>();
 	}
 	
 
