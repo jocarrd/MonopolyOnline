@@ -15,19 +15,9 @@ public class Partida {
 		this.tablero= new Tablero();
 		this.jugadores= new ArrayList<>();
 		
-	}
-	
-	public void jugar_partida() {
-		
-		
-		//Aqui deberiamos empezar a mostar las diferentes interfaces graficas de la partida
-		
-		
 		
 	}
-	
-	
-	
+		
 	
 	public int getDados() {
 		
@@ -37,6 +27,21 @@ public class Partida {
 	public boolean dadosIguales() {
 
 		return true;
+	}
+	
+	public ArrayList<Jugador> getJugadores(){
+		return this.jugadores;
+	}
+	public int numero_jugadores() {
+		return this.jugadores.size();
+	}
+	
+	public boolean nuevo_jugador(Jugador c) {
+		
+			this.jugadores.add(c);
+			return true;
+		
+		
 	}
 
 }

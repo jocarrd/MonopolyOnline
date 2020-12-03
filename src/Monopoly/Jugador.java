@@ -1,5 +1,6 @@
 package Monopoly;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +9,18 @@ public class Jugador {
 	private List<Calle> propiedades;
 	private double dinero;
 	private int posicion_tablero;
+	private  Color c ;
 
-	public Jugador(String nom) {
+	public Jugador(String nom,Color c) {
 		this.nombre = nom;
 		this.propiedades = new ArrayList<>();
 		this.dinero = 0;
 		this.posicion_tablero = 0;
+		this.c=c;
+	}
+	
+	public Color getColor() {
+		return this.c;
 	}
 
 	public String getNombre() {
