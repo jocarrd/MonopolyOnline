@@ -46,6 +46,24 @@ public class PanelPartida extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		for (int i =0;i<this.c.numero_jugadores();i++) {
+			//Posicion inicial de los jugadores
+			
+			Canvas canvas = new Canvas();
+			canvas.setName(this.c.getJugadores().get(i).getNombre());
+			this.p.add(canvas);
+			canvas.setBounds(817, 785, 30, 28);
+			contentPane.add(canvas);
+			canvas.setBackground(this.c.getJugadores().get(i).getColor());
+
+	}
+		
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(PanelPartida.class.getResource("/InterfazGrafica/monopoly.jpg")));
+		lblNewLabel.setBounds(10, 0, 991, 916);
+		contentPane.add(lblNewLabel);
+		
 		Label label = new Label("Dinero ");
 		label.setBounds(1136, 42, 39, 35);
 		contentPane.add(label);
@@ -53,12 +71,6 @@ public class PanelPartida extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBounds(309, 823, 46, 14);
 		contentPane.add(lblNewLabel_1);
-		
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PanelPartida.class.getResource("/InterfazGrafica/monopoly.jpg")));
-		lblNewLabel.setBounds(10, 0, 991, 916);
-		contentPane.add(lblNewLabel);
 		
 		dinero = new JTextField();
 		dinero.setBackground(new Color(0, 255, 51));
@@ -68,15 +80,7 @@ public class PanelPartida extends JFrame {
 		dinero.setColumns(10);
 		this.dinero.setText(0+"");
 		
-		for (int i =0;i<this.c.numero_jugadores();i++) {
-			Canvas canvas = new Canvas();
-			canvas.setName(this.c.getJugadores().get(i).getNombre());
-			this.p.add(canvas);
-			canvas.setBounds(817, 785, 30, 28);
-			contentPane.add(canvas);
-			canvas.setBackground(this.c.getJugadores().get(i).getColor());
 		
-	}
 		
 		
 		
