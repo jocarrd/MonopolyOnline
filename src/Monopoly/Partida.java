@@ -34,6 +34,7 @@ public class Partida {
 	}
 	public int numero_jugadores() {
 		return this.jugadores.size();
+		
 	}
 	
 	public boolean nuevo_jugador(Jugador c) {

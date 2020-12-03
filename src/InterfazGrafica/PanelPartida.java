@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 public class PanelPartida extends JFrame {
 
 	private JPanel contentPane;
-	private Partida c;
+	private Partida partida;
 	private Image v;
 	private List<Canvas> p;
 	private JTextField dinero;
@@ -32,7 +32,7 @@ public class PanelPartida extends JFrame {
 	public PanelPartida(Partida c,Jugador j) {
 		setTitle("Partida");
 		this.p= new ArrayList<>();
-		this.c =c ;
+		this.partida =c ;
 		this.j=j;
 		
 		
@@ -46,17 +46,24 @@ public class PanelPartida extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		for (int i =0;i<this.c.numero_jugadores();i++) {
+		for (int i =0;i<this.partida.numero_jugadores();i++) {
 			//Posicion inicial de los jugadores
 			
+			int suma=0;
 			Canvas canvas = new Canvas();
-			canvas.setName(this.c.getJugadores().get(i).getNombre());
+			canvas.setName(this.partida.getJugadores().get(i).getNombre());
 			this.p.add(canvas);
-			canvas.setBounds(817, 785, 30, 28);
+			canvas.setBounds(817+suma, 785, 30, 28);
+			
 			contentPane.add(canvas);
-			canvas.setBackground(this.c.getJugadores().get(i).getColor());
-
+			canvas.setBackground(this.partida.getJugadores().get(i).getColor());
+			suma=suma+4;
+			
+			System.out.println(canvas.getName());
+		
+			
 	}
+		
 		
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -79,6 +86,8 @@ public class PanelPartida extends JFrame {
 		contentPane.add(dinero);
 		dinero.setColumns(10);
 		this.dinero.setText(0+"");
+		
+		
 		
 		
 		
