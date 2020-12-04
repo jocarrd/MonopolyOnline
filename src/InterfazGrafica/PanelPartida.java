@@ -21,6 +21,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextPane;
+import javax.swing.border.BevelBorder;
+import java.awt.SystemColor;
 
 public class PanelPartida extends JFrame {
 
@@ -41,10 +44,12 @@ public class PanelPartida extends JFrame {
 		
 		
 		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setBounds(100, 100, 1347, 959);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(153, 180, 209));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -90,6 +95,11 @@ public class PanelPartida extends JFrame {
 		dinero.setColumns(10);
 		this.dinero.setText(0+"");
 		
+		JTextPane informacion = new JTextPane();
+		informacion.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		informacion.setBounds(1123, 127, 187, 20);
+		contentPane.add(informacion);
+		
 		JButton Comprar = new JButton("Comprar");
 		Comprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -98,12 +108,15 @@ public class PanelPartida extends JFrame {
 				if(partida.getTurno()==c.indexOf(jugador)) {
 					
 					System.out.println("Puedo comprar");
+					informacion.setText("Compra realizada");
 					
 				}
 			}
 		});
 		Comprar.setBounds(1080, 83, 89, 23);
 		contentPane.add(Comprar);
+		
+		
 		
 		JButton pasarTurno = new JButton("Pasar turno");
 		pasarTurno.addActionListener(new ActionListener() {
@@ -113,15 +126,23 @@ public class PanelPartida extends JFrame {
 				if(partida.getTurno()==c.indexOf(jugador)) {
 					partida.pasarTurno();
 					System.out.println(partida.getTurno());
+					informacion.setText(jugador.getNombre()+" ,has pasado de turno");
 					System.out.println("He passado de turno");
 					
 					
 				}
 				
+				
 			}
 		});
 		pasarTurno.setBounds(1191, 83, 119, 23);
 		contentPane.add(pasarTurno);
+		
+		JButton btnNewButton = new JButton("Ver propiedades");
+		btnNewButton.setBounds(1181, 158, 129, 23);
+		contentPane.add(btnNewButton);
+		
+		
 		
 		
 		

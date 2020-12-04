@@ -1,6 +1,7 @@
 package Monopoly;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Tablero {
+public class Tablero implements Serializable {
 
 	static final int tam = 39;
 

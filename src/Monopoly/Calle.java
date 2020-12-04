@@ -2,8 +2,13 @@ package Monopoly;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.io.Serializable;
 
-public class Calle extends Casilla {
+public class Calle extends Casilla implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Color color;
 	private double precio_compra;
 	private double alquiler;

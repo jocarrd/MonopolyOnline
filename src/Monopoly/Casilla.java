@@ -1,10 +1,11 @@
 package Monopoly;
 
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Casilla {
+public class Casilla implements Serializable {
 	private int numero;
 	private String nombre;
 	private List<Jugador> estan;
