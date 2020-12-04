@@ -5,7 +5,7 @@ import java.awt.Color;
 import Monopoly.Jugador;
 import Monopoly.Partida;
 
-public class Pruebas {
+public class Pruebas  {
 	public static void main(String [] args) throws InterruptedException {
 		Jugador v1 = new Jugador("Jorge",Color.BLUE);
 		Jugador v2 = new Jugador("Adrian",Color.BLUE);
@@ -18,8 +18,12 @@ public class Pruebas {
 		RegistrarJugador registro = new RegistrarJugador();
 		
 		
-			
-			//System.out.println(registro.getJugador().getNombre()+registro.getJugador().getColor());
 		
+			while(registro.isShowing()) {
+				
+			}
+			
+			System.out.println(registro.getJugador().getNombre()+registro.getJugador().getColor() +"hola");
+			
 	}
 }

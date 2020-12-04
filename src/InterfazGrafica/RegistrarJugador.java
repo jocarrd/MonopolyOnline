@@ -62,6 +62,7 @@ public class RegistrarJugador extends JFrame {
 				String selecionado = (String)comboBox.getSelectedItem();
 				Color c = Color.getColor(selecionado);
 				Jugador nuevo = new Jugador(textField.getText(),c);
+				
 			}
 		});
 		btnNewButton.setBounds(251, 161, 89, 23);
