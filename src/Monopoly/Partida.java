@@ -30,6 +30,15 @@ public class Partida implements Serializable {
 
 	}
 	
+	public boolean fin()
+	{
+		return this.jugadores.size()==0;
+	}
+	public int maxJugadores() {
+		return MAXJUGADORES;
+		
+	}
+	
 	public  int getId() {
 		return this.id_partida;
 	}

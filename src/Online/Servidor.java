@@ -18,11 +18,9 @@ public class Servidor {
 
 		try (ServerSocket c = new ServerSocket(5555)) {
 			ExecutorService pool = Executors.newCachedThreadPool();
-			List<Partida> partidas = new ArrayList<>();
-			partidas.add(new Partida(1));
-			partidas.add(new Partida(2));
-			partidas.add(new Partida(3));
-			partidas.add(new Partida(4));
+			List<SalaOnline> SalasOnline = new ArrayList<>();
+			
+			SalasOnline.add(new SalaOnline(new Partida(1),"China"));
 
 			while (true) {
 
@@ -31,8 +29,8 @@ public class Servidor {
 					Socket cliente = c.accept();
 					InputStream entrada = cliente.getInputStream();
 					ObjectOutputStream  salida =  new ObjectOutputStream (cliente.getOutputStream());
+					salida.writeObject(SalasOnline);
 					
-					salida.writeObject(partidas);//enviamos el estado de las partidas del servidor
 					
 					
 
