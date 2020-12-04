@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 
+import InterfazGrafica.RegistrarJugador;
 import Monopoly.Partida;
 
 public class Cliente {
@@ -15,6 +16,12 @@ public class Cliente {
 			Socket servidor = new Socket("localhost", 5555);
 			ObjectInputStream  entrada =  new ObjectInputStream (servidor.getInputStream());
 			try {
+				RegistrarJugador registro = new RegistrarJugador();
+				
+				
+				
+				
+				
 				List<Partida> partidas =(List<Partida>) entrada.readObject(); //Obtenemos las partidas en curso en el servidor
 				for(Partida c : partidas) {
 					System.out.println(c.getId());

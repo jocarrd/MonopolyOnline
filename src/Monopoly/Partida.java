@@ -16,13 +16,13 @@ public class Partida implements Serializable {
 	 * 
 	 */
 
-	private int id_partida;
+	private String id_partida;
 	private int turno;
 	private Tablero tablero;
 	private ArrayList<Jugador> jugadores;
 	private static final int MAXJUGADORES = 8;
 
-	public Partida(int id) {
+	public Partida(String id) {
 		this.id_partida = id;
 		this.turno = 0;
 		this.tablero = new Tablero();
@@ -39,7 +39,7 @@ public class Partida implements Serializable {
 		
 	}
 	
-	public  int getId() {
+	public  String getId() {
 		return this.id_partida;
 	}
 
