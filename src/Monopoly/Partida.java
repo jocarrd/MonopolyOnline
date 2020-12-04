@@ -16,8 +16,11 @@ public class Partida {
 		this.jugadores= new ArrayList<>();
 		
 		
+		
+		
 	}
 		
+	
 	
 	public int getDados() {
 		
@@ -40,9 +43,30 @@ public class Partida {
 	public boolean nuevo_jugador(Jugador c) {
 		
 			this.jugadores.add(c);
+			this.tablero.getCasilla(0).anadir_jugador_casilla(c); //Poenmos en la casilla de salida al jugador que añadimos
 			return true;
 		
 		
+	}
+	
+	public int getTurno() {
+		return this.turno;
+	}
+	
+	
+	public void setTurno(int c) {
+		this.turno=c;
+	}
+	public void pasarTurno() {
+		if(this.turno==this.jugadores.size()-1) {
+			this.turno=0;
+		}else {
+			this.turno++;
+		}
+	}
+	
+	public Tablero getTablero() {
+		return this.tablero;
 	}
 
 }

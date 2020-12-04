@@ -18,6 +18,9 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Label;
 import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelPartida extends JFrame {
 
@@ -26,14 +29,14 @@ public class PanelPartida extends JFrame {
 	private Image v;
 	private List<Canvas> p;
 	private JTextField dinero;
-	private Jugador j;
+	private Jugador jugador;
 	
 	
 	public PanelPartida(Partida c,Jugador j) {
 		setTitle("Partida");
 		this.p= new ArrayList<>();
 		this.partida =c ;
-		this.j=j;
+		this.jugador=j;
 		
 		
 		
@@ -51,6 +54,7 @@ public class PanelPartida extends JFrame {
 			
 			int suma=0;
 			Canvas canvas = new Canvas();
+			
 			canvas.setName(this.partida.getJugadores().get(i).getNombre());
 			this.p.add(canvas);
 			canvas.setBounds(817+suma, 785, 30, 28);
@@ -59,11 +63,10 @@ public class PanelPartida extends JFrame {
 			canvas.setBackground(this.partida.getJugadores().get(i).getColor());
 			suma=suma+4;
 			
-			System.out.println(canvas.getName());
 		
 			
 	}
-		
+		System.out.println(partida.getTablero().getCasilla(0).getJugadores());
 		
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -86,6 +89,39 @@ public class PanelPartida extends JFrame {
 		contentPane.add(dinero);
 		dinero.setColumns(10);
 		this.dinero.setText(0+"");
+		
+		JButton Comprar = new JButton("Comprar");
+		Comprar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ArrayList<Jugador> c = partida.getJugadores();
+				
+				if(partida.getTurno()==c.indexOf(jugador)) {
+					
+					System.out.println("Puedo comprar");
+					
+				}
+			}
+		});
+		Comprar.setBounds(1080, 83, 89, 23);
+		contentPane.add(Comprar);
+		
+		JButton pasarTurno = new JButton("Pasar turno");
+		pasarTurno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Jugador> c = partida.getJugadores();
+				
+				if(partida.getTurno()==c.indexOf(jugador)) {
+					partida.pasarTurno();
+					System.out.println(partida.getTurno());
+					System.out.println("He passado de turno");
+					
+					
+				}
+				
+			}
+		});
+		pasarTurno.setBounds(1191, 83, 119, 23);
+		contentPane.add(pasarTurno);
 		
 		
 		

@@ -19,6 +19,9 @@ public class Casilla {
 		//this.fondo = fondo;
 		this.estan = new ArrayList<>();
 	}
+	public  List<Jugador> getJugadores(){
+		return this.estan;
+	}
 	
 
 	public String getNombre() {

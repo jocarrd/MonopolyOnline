@@ -18,7 +18,9 @@ public class Tablero {
 
 	
 	
-	
+	public Casilla getCasilla(int c) {
+		return this.casillas[c];
+	}
 	
 	
 	public Tablero() {
