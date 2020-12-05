@@ -67,16 +67,15 @@ public class PanelPartida extends JFrame {
 			contentPane.add(canvas);
 			canvas.setBackground(this.partida.getJugadores().get(i).getColor());
 			suma=suma+4;
-			
+	
+		}
 		
-			
-	}
 		System.out.println(partida.getTablero().getCasilla(0).getJugadores());
 		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PanelPartida.class.getResource("/InterfazGrafica/monopoly.jpg")));
-		lblNewLabel.setBounds(10, 0, 991, 916);
+		lblNewLabel.setBounds(77, -107, 969, 887);
 		contentPane.add(lblNewLabel);
 		
 		Label label = new Label("Dinero ");
