@@ -16,6 +16,8 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 import java.awt.event.ActionEvent;
 
 public class RegistrarJugador extends JFrame {
@@ -23,6 +25,7 @@ public class RegistrarJugador extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private Jugador jugadorCreado;
+	
 
 	/**
 	 * Launch the application.
@@ -32,7 +35,7 @@ public class RegistrarJugador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistrarJugador() {
+	public RegistrarJugador(CyclicBarrier barrera) {
 		setTitle("Registro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -62,6 +65,12 @@ public class RegistrarJugador extends JFrame {
 				String selecionado = (String)comboBox.getSelectedItem();
 				Color c = Color.getColor(selecionado);
 				Jugador nuevo = new Jugador(textField.getText(),c);
+				try {
+					barrera.await();
+				} catch (InterruptedException | BrokenBarrierException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 		});

@@ -27,8 +27,11 @@ public class Servidor {
 			ExecutorService sesiones = Executors.newCachedThreadPool();
 			List<Partida> partidas = new ArrayList<>();
 			Partida v1 = new Partida("1");
+			Partida v3 = new Partida("3");
+			Partida v4 = new Partida("4");
 			partidas.add( v1);
-
+			partidas.add( v3);
+			partidas.add( v4);
 			while (true) {
 
 				try {
@@ -44,6 +47,7 @@ public class Servidor {
 							s.writeObject(partidas);
 							s.flush();
 						}
+						
 					
 					
 					

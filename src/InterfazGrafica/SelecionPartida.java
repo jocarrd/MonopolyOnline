@@ -42,7 +42,7 @@ public class SelecionPartida extends JFrame {
 		contentPane.add(bienvenida);
 		
 		JLabel selecion = new JLabel("");
-		selecion.setFont(new Font("Power Green Small", Font.PLAIN, 22));
+		selecion.setFont(new Font("Maiandra GD", Font.PLAIN, 22));
 		selecion.setForeground(Color.GREEN);
 		selecion.setBounds(352, 349, 104, 32);
 		contentPane.add(selecion);
@@ -55,9 +55,16 @@ public class SelecionPartida extends JFrame {
 				 public void mouseEntered(MouseEvent e) {
 					 selecion.setText(btnNewButton.getText());
 			 }
-				 public void mouseExit(MouseEvent e) {
-					 selecion.setText("");
-			 }
+				 public void mouseExited(MouseEvent e) {
+					 selecion.setText(" ");
+				 }
+				 
+				 public void mousePressed(MouseEvent e){
+					
+					 
+				 }
+				 
+				
 				 
 			 });
 			
