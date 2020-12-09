@@ -1,6 +1,8 @@
 package InterfazGrafica;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 import Monopoly.Jugador;
 import Monopoly.Partida;
@@ -13,16 +15,16 @@ public class Pruebas  {
 		
 		p.nuevo_jugador(v1);
 		p.nuevo_jugador(v2);
+		List<Partida> partidas = new ArrayList<>();
+		partidas .add(p);
+		partidas .add(p);
+		partidas .add(p);
+		partidas .add(p);
+		partidas .add(p);
 		
-		PanelPartida c = new PanelPartida(p,v1);
-		RegistrarJugador registro = new RegistrarJugador();
-			
-		
-//			while(registro.isShowing()) {
-//				
-//			}
-			
-			System.out.println(registro.getJugador().getNombre() + " " + registro.getJugador().getColor() + " hola");
+		//TableroCliente c = new TableroCliente(p,v1);
+		SelecionPartida asdsa = new SelecionPartida(partidas);
+
 			
 	}
 }

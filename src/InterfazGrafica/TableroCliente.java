@@ -20,12 +20,13 @@ import java.awt.Label;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.net.Socket;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
 
-public class PanelPartida extends JFrame {
+public class TableroCliente extends JFrame  {
 
 	private JPanel contentPane;
 	private Partida partida;
@@ -33,9 +34,14 @@ public class PanelPartida extends JFrame {
 	private List<Canvas> p;
 	private JTextField dinero;
 	private Jugador jugador;
+	private Socket servidor;
 	
 	
-	public PanelPartida(Partida c,Jugador j) {
+	
+	
+	
+	
+	public TableroCliente(Partida c,Jugador j) {
 		setTitle("Partida");
 		this.p= new ArrayList<>();
 		this.partida =c ;
@@ -74,7 +80,7 @@ public class PanelPartida extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PanelPartida.class.getResource("/InterfazGrafica/monopoly.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(TableroCliente.class.getResource("/InterfazGrafica/monopoly.jpg")));
 		lblNewLabel.setBounds(77, -107, 969, 887);
 		contentPane.add(lblNewLabel);
 		
@@ -161,4 +167,8 @@ public class PanelPartida extends JFrame {
 		
 	
 	}
+
+
+	
+	
 }

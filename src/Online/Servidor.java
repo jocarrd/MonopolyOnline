@@ -1,13 +1,16 @@
 package Online;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,26 +25,25 @@ public class Servidor {
 
 		try (ServerSocket c = new ServerSocket(5555)) {
 			ExecutorService sesiones = Executors.newCachedThreadPool();
-			HashMap<String,Partida> partidas = new HashMap<>();
+			List<Partida> partidas = new ArrayList<>();
 			Partida v1 = new Partida("1");
-			partidas.put(v1.getId(), v1);
+			partidas.add( v1);
 
 			while (true) {
 
 				try {
-
+					
 					Socket cliente = c.accept();
-					DataInputStream entrada = new DataInputStream(cliente.getInputStream());
-					ObjectOutputStream  salida =  new ObjectOutputStream (cliente.getOutputStream());
-					salida.writeObject(partidas);//Enviando estado de las salas
 					
-					Jugador j;
+					DataInputStream  ent =  new DataInputStream (cliente.getInputStream());
 					
-					String id =entrada.readLine(); //Obtenemos el id de la sala para unirnos
+				
 					
-					//sesiones.execute(new SesionOnline(partidas.get(id),j));
-					
-					
+						if(ent.readLine().equals("inicio")) {
+							ObjectOutputStream  s=  new ObjectOutputStream (cliente.getOutputStream());	
+							s.writeObject(partidas);
+							s.flush();
+						}
 					
 					
 					
