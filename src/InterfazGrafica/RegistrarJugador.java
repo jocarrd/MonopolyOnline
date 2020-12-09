@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Monopoly.Jugador;
+import Monopoly.Partida;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -16,8 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class RegistrarJugador extends JFrame {
@@ -25,7 +25,6 @@ public class RegistrarJugador extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private Jugador jugadorCreado;
-	
 
 	/**
 	 * Launch the application.
@@ -35,7 +34,7 @@ public class RegistrarJugador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistrarJugador() {
+	public RegistrarJugador(List<Partida> partidas) {
 		setTitle("Registro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -65,7 +64,8 @@ public class RegistrarJugador extends JFrame {
 				String selecionado = (String)comboBox.getSelectedItem();
 				Color c = Color.getColor(selecionado);
 				Jugador nuevo = new Jugador(textField.getText(),c);
-				
+				SelecionPartida seleccion = new SelecionPartida(partidas);
+				RegistrarJugador.this.dispose();
 				
 			}
 		});
