@@ -1,6 +1,7 @@
 package InterfazGrafica;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -23,6 +24,7 @@ import javax.swing.JButton;
 public class SelecionPartida extends JFrame {
 
 	private JPanel contentPane;
+	private String selecionado;
 
 	public SelecionPartida(List<Partida> partidas) {
 
@@ -61,7 +63,8 @@ public class SelecionPartida extends JFrame {
 				 
 				 public void mousePressed(MouseEvent e){
 					
-					 
+					 JButton cw =(JButton) e.getComponent();
+					 selecionado=cw.getText();
 				 }
 				 
 				

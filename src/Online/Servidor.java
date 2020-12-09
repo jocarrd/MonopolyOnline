@@ -35,7 +35,7 @@ public class Servidor {
 			while (true) {
 
 				try {
-					
+					 
 					Socket cliente = c.accept();
 					
 					DataInputStream  ent =  new DataInputStream (cliente.getInputStream());

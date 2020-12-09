@@ -35,7 +35,7 @@ public class RegistrarJugador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistrarJugador(CyclicBarrier barrera) {
+	public RegistrarJugador() {
 		setTitle("Registro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -65,12 +65,7 @@ public class RegistrarJugador extends JFrame {
 				String selecionado = (String)comboBox.getSelectedItem();
 				Color c = Color.getColor(selecionado);
 				Jugador nuevo = new Jugador(textField.getText(),c);
-				try {
-					barrera.await();
-				} catch (InterruptedException | BrokenBarrierException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 				
 			}
 		});
