@@ -57,7 +57,7 @@ public class SelecionPartida extends JFrame {
 				 public void mouseEntered(MouseEvent e) {
 					 selecion.setText(btnNewButton.getText());
 			 }
-				 public void mouseExited(MouseEvent e) {
+				 public void mouseExited(MouseEvent e) { 
 					 selecion.setText(" ");
 				 }
 				 
