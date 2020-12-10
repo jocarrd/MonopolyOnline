@@ -2,6 +2,7 @@ package Monopoly;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Partida implements Serializable {
 	/**
@@ -19,7 +20,7 @@ public class Partida implements Serializable {
 	private String id_partida;
 	private int turno;
 	private Tablero tablero;
-	private ArrayList<Jugador> jugadores;
+	private List<Jugador> jugadores;
 	private static final int MAXJUGADORES = 8;
 
 	public Partida(String id) {
@@ -28,6 +29,10 @@ public class Partida implements Serializable {
 		this.tablero = new Tablero();
 		this.jugadores = new ArrayList<>();
 
+	}
+	
+	public void resetJugadores(List<Jugador> jugadores) {
+		this.jugadores=jugadores;
 	}
 	
 	public boolean fin()
@@ -53,7 +58,7 @@ public class Partida implements Serializable {
 		return true;
 	}
 
-	public ArrayList<Jugador> getJugadores() {
+	public List<Jugador> getJugadores() {
 		return this.jugadores;
 	}
 

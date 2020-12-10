@@ -16,15 +16,18 @@ import Monopoly.Partida;
 
 public class Cliente {
 	public static void main(String[] args) {
-		RegistrarJugador registro;
+		RegistrarJugador registro=null;
+		DataOutputStream salida=null;
+		ObjectInputStream s =null;
 
 		try (Socket servidor = new Socket("localhost", 5555);) {
-			DataOutputStream salida = new DataOutputStream(servidor.getOutputStream());
+			salida = new DataOutputStream(servidor.getOutputStream());
 
 			salida.writeBytes("inicio" + "\r\n");
 			salida.flush();
 
-			ObjectInputStream s = new ObjectInputStream(servidor.getInputStream());
+			 s = new ObjectInputStream(servidor.getInputStream());
+			
 			try {
 				List<Partida> partidas = (List<Partida>) s.readObject();
 				registro = new RegistrarJugador();
@@ -32,15 +35,21 @@ public class Cliente {
 				while(registro.isShowing()) {
 					
 				}
-				Jugador registrado = registro.getJugador(); //Jugador Registrado
+				Jugador jugador= registro.getJugador(); //Jugador Registrado
 				SelecionPartida seleccion = new SelecionPartida(partidas);
 				
 				while(seleccion.isShowing()) {
 					
 				}
 				Partida jugar = seleccion.getPartida();
-				System.out.println(registrado.getNombre()+ registrado.getPosicion_tablero() + registrado.getColor());
-				System.out.println(jugar.getId());
+				
+				
+				//inicio proceso unirse a partida
+				salida.writeBytes("unir a partida" +"\r\n");
+				salida.writeBytes(jugar.getId() +"\r\n" );
+				ObjectOutputStream envioclases = new ObjectOutputStream(salida);
+				envioclases.writeObject(jugador);
+				
 				
 				
 				
@@ -52,11 +61,28 @@ public class Cliente {
 				e.printStackTrace();
 			}
 
-			// salida.write("unir"+" nombre_partida"+"\r\n");
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		finally {
+			if(salida!=null)
+				try {
+					salida.close();
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+				}
+			
+			if(s!=null)
+				try {
+					s.close();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			}
 
 	}
 
