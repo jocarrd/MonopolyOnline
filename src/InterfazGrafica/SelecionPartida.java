@@ -1,5 +1,6 @@
 package InterfazGrafica;
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -18,6 +19,16 @@ import javax.swing.JButton;
 public class SelecionPartida extends JFrame {
 
 	private JPanel contentPane;
+	private Partida selecionada;
+	
+	
+	public Partida getPartida() {
+		return selecionada;
+	}
+	
+	
+	
+	
 
 	public SelecionPartida(List<Partida> partidas) {
 
@@ -44,7 +55,7 @@ public class SelecionPartida extends JFrame {
 		this.setResizable(false);
 		int c = 30;
 		for (Partida i : partidas) {
-			JButton btnNewButton = new JButton("Partida " + i.getId());
+			JButton btnNewButton = new JButton(i.getId());
 			btnNewButton.setBackground(Color.GREEN);
 			btnNewButton.addMouseListener(new MouseAdapter() {
 				public void mouseEntered(MouseEvent e) {
@@ -53,6 +64,19 @@ public class SelecionPartida extends JFrame {
 
 				public void mouseExited(MouseEvent e) {
 					selecion.setText("");
+				}
+				
+				public void mouseClicked(MouseEvent e) {
+					JButton c = (JButton)e.getComponent();
+					for(Partida d : partidas) {
+						if(d.getId().equals(c.getText())) {
+							selecionada=d;
+						}
+					}
+
+					SelecionPartida.this.dispose();
+					
+				
 				}
 
 			});
@@ -87,7 +111,9 @@ public class SelecionPartida extends JFrame {
 
 		});
 		parpadeo.start();
-		System.out.println("hola");
-
+		
+		
+		
+		
 	}
 }

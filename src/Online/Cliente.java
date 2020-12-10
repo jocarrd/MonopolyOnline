@@ -11,6 +11,7 @@ import java.util.List;
 
 import InterfazGrafica.RegistrarJugador;
 import InterfazGrafica.SelecionPartida;
+import Monopoly.Jugador;
 import Monopoly.Partida;
 
 public class Cliente {
@@ -26,10 +27,27 @@ public class Cliente {
 			ObjectInputStream s = new ObjectInputStream(servidor.getInputStream());
 			try {
 				List<Partida> partidas = (List<Partida>) s.readObject();
-				registro = new RegistrarJugador(partidas);
+				registro = new RegistrarJugador();
+
+				while(registro.isShowing()) {
+					
+				}
+				Jugador registrado = registro.getJugador(); //Jugador Registrado
+				SelecionPartida seleccion = new SelecionPartida(partidas);
 				
-				//SelecionPartida seleccion = new SelecionPartida(partidas);
-				System.out.println(partidas.toString());
+				while(seleccion.isShowing()) {
+					
+				}
+				Partida jugar = seleccion.getPartida();
+				System.out.println(registrado.getNombre()+ registrado.getPosicion_tablero() + registrado.getColor());
+				System.out.println(jugar.getId());
+				
+				
+				
+				
+				
+				
+				
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}

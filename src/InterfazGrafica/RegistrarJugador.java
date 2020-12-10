@@ -34,7 +34,7 @@ public class RegistrarJugador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistrarJugador(List<Partida> partidas) {
+	public RegistrarJugador() {
 		setTitle("Registro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -63,8 +63,10 @@ public class RegistrarJugador extends JFrame {
 				
 				String selecionado = (String)comboBox.getSelectedItem();
 				Color c = Color.getColor(selecionado);
+				//No seleciona bien el color , buscar solucion
+				
 				Jugador nuevo = new Jugador(textField.getText(),c);
-				SelecionPartida seleccion = new SelecionPartida(partidas);
+				jugadorCreado=nuevo;
 				RegistrarJugador.this.dispose();
 				
 			}
