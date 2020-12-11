@@ -28,10 +28,19 @@ public class Partida implements Serializable {
 		this.turno = 0;
 		this.tablero = new Tablero();
 		this.jugadores = new ArrayList<>();
-
+ 
+	} 
+	
+	public boolean estaJugador(Jugador c) {
+		for(Jugador jugador : this.jugadores) {
+			if(jugador.getNombre().equals(c.getNombre())) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
-	public void resetJugadores(List<Jugador> jugadores) {
+	public void setJugadores(List<Jugador> jugadores) {
 		this.jugadores=jugadores;
 	}
 	
