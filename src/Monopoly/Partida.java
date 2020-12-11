@@ -48,15 +48,17 @@ public class Partida implements Serializable {
 		return this.id_partida;
 	}
 
-	public int getDados() {
-
-		return 0;
+	public List<Integer> getDados() {
+		
+		int d1 =(int) (1+ Math.random()*6);
+		int d2 =(int) (1+ Math.random()*6);
+		List<Integer> dados = new ArrayList<>();
+		dados.add(d1);
+		dados.add(d2);
+		return dados;
 	}
 
-	public boolean dadosIguales() {
-
-		return true;
-	}
+	
 
 	public List<Jugador> getJugadores() {
 		return this.jugadores;
@@ -70,7 +72,6 @@ public class Partida implements Serializable {
 	public boolean nuevo_jugador(Jugador c) {
 
 		this.jugadores.add(c);
-		this.tablero.getCasilla(0).anadir_jugador_casilla(c); // Poenmos en la casilla de salida al jugador que añadimos
 		return true;
 
 	}

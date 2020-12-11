@@ -8,21 +8,17 @@ import java.util.List;
 public class Casilla implements Serializable {
 	private int numero;
 	private String nombre;
-	private List<Jugador> estan;
 	private TipoCasilla tipoCasilla;
-	//private Image fondo;
+	
 
 	
 	public Casilla(int numero, String nombre, TipoCasilla t) {
 		this.numero = numero;
 		this.nombre = nombre;
 		this.tipoCasilla = t;
-		//this.fondo = fondo;
-		this.estan = new ArrayList<>();
+		
 	}
-	public  List<Jugador> getJugadores(){
-		return this.estan;
-	}
+	
 	
 
 	public String getNombre() {
@@ -33,22 +29,9 @@ public class Casilla implements Serializable {
 		this.nombre = nombre;
 	}
 
-//	public Image getFondo() {
-//		return fondo;
-//	}
-//
-//	public void setFondo(Image fondo) {
-//		this.fondo = fondo;
-//	}
 
-	public boolean anadir_jugador_casilla(Jugador c) {
-		if (!this.estan.contains(c)) {
-			this.estan.add(c);
-			return true;
 
-		}
-		return false;
-	}
+	
 
 	public int getNumero() {
 		return numero;
@@ -65,5 +48,7 @@ public class Casilla implements Serializable {
 	public void setTipoCasilla(TipoCasilla t) {
 		this.tipoCasilla = t;
 	}
+	
+	
 
 }

@@ -13,6 +13,8 @@ public class Jugador implements Serializable {
 	private  Color c ;
 
 	public Jugador(String nom,Color c) {
+		//Se pone en la casilla de salida al jugador
+		
 		this.nombre = nom;
 		this.propiedades = new ArrayList<>();
 		this.dinero = 0;
@@ -59,9 +61,11 @@ public class Jugador implements Serializable {
 	public void movimiento_tablero(int c) {
 		if (this.posicion_tablero + c >= Tablero.tam) {
 			this.posicion_tablero = (this.posicion_tablero + c) - Tablero.tam;
+		}else {
+			this.posicion_tablero = this.posicion_tablero + c;
 		}
 
-		this.posicion_tablero = this.posicion_tablero + c;
+		
 	}
 
 	public boolean anadir_propiedad(Calle c) {
