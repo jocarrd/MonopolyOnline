@@ -26,14 +26,14 @@ public class Tablero implements Serializable {
 	
 	public Tablero() {
 
-		// Aqui deberiamos inicializar el tablero añadiendo todas las casillas en la
+		// Aqui deberiamos inicializar el tablero aÃ±adiendo todas las casillas en la
 		// posiciones correspondientes
 		List<String> nombres_calles = new ArrayList<>();
 		List<Color> colores_calles = new ArrayList<>();
 		
 		
 		colores_calles.add(Color.BLUE); nombres_calles.add("Calvo Sotelo");
-		colores_calles.add(Color.BLUE); nombres_calles.add("Capitán Cortés");
+		colores_calles.add(Color.BLUE); nombres_calles.add("CapitÃ¡n CortÃ©s");
 		colores_calles.add(Color.BLUE);	nombres_calles.add("Coronel Innerarity");
 		colores_calles.add(Color.RED);	nombres_calles.add("Defensores de Villarrea");
 		colores_calles.add(Color.RED);	nombres_calles.add("Miguel Escalona");
@@ -41,7 +41,7 @@ public class Tablero implements Serializable {
 		colores_calles.add(Color.YELLOW);nombres_calles.add("Calle Caballero de La Rosa");
 		colores_calles.add(Color.YELLOW);nombres_calles.add("Calle Candado");
 		colores_calles.add(Color.YELLOW);nombres_calles.add("Calle Emilia Pardo Bazan");
-		colores_calles.add(Color.PINK);nombres_calles.add("Avenida España");
+		colores_calles.add(Color.PINK);nombres_calles.add("Avenida EspaÃ±a");
 		colores_calles.add(Color.PINK);nombres_calles.add("Calle General Espartero");
 		colores_calles.add(Color.PINK);nombres_calles.add("Calle Huesca");
 		colores_calles.add(Color.GREEN);nombres_calles.add("La Cava");
@@ -49,14 +49,28 @@ public class Tablero implements Serializable {
 		colores_calles.add(Color.GREEN);nombres_calles.add("Calle Portalada");
 		colores_calles.add(Color.ORANGE);nombres_calles.add("Espolon");
 		colores_calles.add(Color.ORANGE);nombres_calles.add("Avenida Madrid");
-		colores_calles.add(Color.ORANGE);nombres_calles.add("Gran Vía");
+		colores_calles.add(Color.ORANGE);nombres_calles.add("Gran VÃ­a");
 		colores_calles.add(Color.WHITE);nombres_calles.add("Murrieta");
 		colores_calles.add(Color.WHITE);nombres_calles.add("Avenida de Portugal");
 		colores_calles.add(Color.WHITE);nombres_calles.add("Portales");
 		colores_calles.add(Color.ORANGE);nombres_calles.add("Club Deportivo");
-		colores_calles.add(Color.ORANGE);nombres_calles.add("Republica Argentina");
+		colores_calles.add(Color.ORANGE);nombres_calles.add("Republica Argentina"); 
 		colores_calles.add(Color.ORANGE);nombres_calles.add("Lobete");
-		colores_calles.add(Color.ORANGE);nombres_calles.add("Jorge Vigon");
+		
+		colores_calles.add(Color.black);nombres_calles.add("Marques de la Ensenada");
+		colores_calles.add(Color.black);nombres_calles.add("Avenida de la Paz");
+		colores_calles.add(Color.black);nombres_calles.add("Pradoviejo");
+		colores_calles.add(Color.black);nombres_calles.add("Alcampo");
+		
+		colores_calles.add(Color.GREEN);nombres_calles.add("Mercadona");
+		colores_calles.add(Color.ORANGE);nombres_calles.add("Aldi");
+		colores_calles.add(Color.ORANGE);nombres_calles.add("Edeka");
+		colores_calles.add(Color.ORANGE);nombres_calles.add("Eroski");
+		colores_calles.add(Color.ORANGE);nombres_calles.add("MacFit");
+		
+		
+		
+		
 		
 		
 		
@@ -69,7 +83,7 @@ public class Tablero implements Serializable {
 				this.casillas[i] = c;
 			} 
 
-			else if ((i  == 2) ||(i > 17) || (i > 33)) {
+			else if ((i  == 2) ||(i ==17) || (i ==33)) {
 				Casilla c = new Casilla(i, "Comunidad", TipoCasilla.comunidad); 
 				this.casillas[i] = c;
 			}
@@ -86,7 +100,7 @@ public class Tablero implements Serializable {
 				this.casillas[i] = c;
 
 			}
-			else if((i==4)||(i==12) ||(i==19)||(i==25) ||(i==35)) {
+			else if((i==3)||(i==38) ) {
 				Casilla c = new Casilla(i, "Impuesto", TipoCasilla.impuesto); 
 				this.casillas[i] = c;
 			}
