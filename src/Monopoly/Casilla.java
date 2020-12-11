@@ -10,7 +10,13 @@ public class Casilla implements Serializable {
 	private String nombre;
 	private TipoCasilla tipoCasilla;
 	
-
+ 
+	
+	public boolean esunaCalle() {
+		return tipoCasilla.equals(TipoCasilla.calle);
+			
+		
+	}
 	
 	public Casilla(int numero, String nombre, TipoCasilla t) {
 		this.numero = numero;
@@ -19,7 +25,7 @@ public class Casilla implements Serializable {
 		
 	}
 	
-	
+	 
 
 	public String getNombre() {
 		return nombre;

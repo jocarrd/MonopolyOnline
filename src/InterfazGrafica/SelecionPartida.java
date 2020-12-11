@@ -27,7 +27,7 @@ public class SelecionPartida extends JFrame {
 	}
 	
 	
-	
+	  
 	
 
 	public SelecionPartida(List<Partida> partidas) {

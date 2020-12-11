@@ -17,7 +17,7 @@ public class Pruebas  {
 		p.nuevo_jugador(v2);
 		List<Partida> partidas = new ArrayList<>();
 		
-		
+		 
 		TableroCliente c = new TableroCliente(p,v1);
 		
 

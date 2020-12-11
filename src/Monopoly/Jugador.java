@@ -17,7 +17,7 @@ public class Jugador implements Serializable {
 		
 		this.nombre = nom;
 		this.propiedades = new ArrayList<>();
-		this.dinero = 0;
+		this.dinero = 2000;
 		this.posicion_tablero = 0;
 		this.c=c;
 	}
@@ -28,7 +28,7 @@ public class Jugador implements Serializable {
 
 	public String getNombre() {
 		return nombre;
-	}
+	} 
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -49,12 +49,16 @@ public class Jugador implements Serializable {
 	public void setPosicion_tablero(int posicion_tablero) {
 		this.posicion_tablero = posicion_tablero;
 	}
+	
+	public List<Calle> getPropiedades() {
+		return this.propiedades;
+	}
 
-	public void ingresar_dinero(int din) {
+	public void ingresar_dinero(double din) {
 		this.dinero = this.dinero + din;
 	}
 
-	public void sacar_dinero(int din) {
+	public void sacar_dinero(double din) {
 		this.dinero = this.dinero - din;
 	}
 

@@ -22,7 +22,7 @@ public class Tablero implements Serializable {
 	public Casilla getCasilla(int c) {
 		return this.casillas[c];
 	}
-	
+	 
 	
 	public Tablero() {
 
@@ -65,23 +65,23 @@ public class Tablero implements Serializable {
 
 		for (int i = 0; i <= Tablero.tam; i++) {
 			if (i == 0) {
-				Casilla c = new Casilla(i, "Salida", TipoCasilla.carcel);  
+				Casilla c = new Casilla(i, "Salida", TipoCasilla.salida);  
 				this.casillas[i] = c;
 			}
 
-			else if ((i % 9 == 0) && (i > 8)) {
+			else if ((i  == 2) ||(i > 17) || (i > 33)) {
 				Casilla c = new Casilla(i, "Comunidad", TipoCasilla.comunidad); 
 				this.casillas[i] = c;
 			}
 
-			else if (i == 14) {
+			else if ((i == 10)&&(i == 30))  {
 				Casilla c = new Casilla(i, "Carcel", TipoCasilla.carcel); 
 				this.casillas[i] = c;
 
-			} else if ((i % 10 == 0) && (i > 9)) {
+			} else if ((i == 7) && (i == 22)&& (i == 36)) {
 				Casilla c = new Casilla(i, "Sorpresa", TipoCasilla.sorpresa); 
 				this.casillas[i] = c;
-			} else if (i == 17) {
+			} else if (i == 20) {
 				Casilla c = new Casilla(i, "Parking", TipoCasilla.parking); 
 				this.casillas[i] = c;
 
@@ -92,11 +92,13 @@ public class Tablero implements Serializable {
 			}
 
 			else {
-				Casilla c = new Calle(i,nombres_calles.get(cont) ,colores_calles.get(cont),Math.random()*(1000-500)*500,Math.random()*(100-15)*15, false); 
+				Casilla c = new Calle(i,nombres_calles.get(cont) ,colores_calles.get(cont),Math.random()*1000,Math.random()*(100-15)*15); 
 				this.casillas[i] = c;
 				cont++;
 
 		}
+			
+			System.out.println(this.casillas[i].esunaCalle());
 	}
 
 }

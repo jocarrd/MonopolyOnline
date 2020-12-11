@@ -34,7 +34,7 @@ public class RegistrarJugador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistrarJugador() {
+	public RegistrarJugador() { 
 		setTitle("Registro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

@@ -12,21 +12,21 @@ public class Calle extends Casilla implements Serializable {
 	private Color color;
 	private double precio_compra;
 	private double alquiler;
-	private boolean tienePropietario ;
+	private Jugador Propietario ;
 	
 
 
-	public Calle(int numero, String nombre, Color c, double compra, double venta, boolean tienePropietario) {
+	public Calle(int numero, String nombre, Color c, double compra, double venta) {
 		super(numero, nombre, TipoCasilla.calle);
 		this.color = c;
 		this.precio_compra = compra;
 		this.alquiler = venta;
-		this.tienePropietario = tienePropietario;
-		
+		this.Propietario = null;
+		 
 
 	}
 
-	public Color getColor() {
+	public Color getColor() { 
 		return color;
 	}
 
@@ -50,12 +50,12 @@ public class Calle extends Casilla implements Serializable {
 		this.alquiler = alquiler;
 	}
 	
-	public boolean getTienePropietario() {
-		return tienePropietario;
+	public boolean TienePropietario() {
+		return this.Propietario==null;
 	}
 
-	public void setTienePropietario(boolean tienePropietario) {
-		this.tienePropietario = tienePropietario;
+	public void setPropietario(Jugador tienePropietario) {
+		this.Propietario = tienePropietario;
 	}
 	
 
