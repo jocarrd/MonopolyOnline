@@ -38,7 +38,7 @@ public class TableroCliente extends JFrame {
 	private JPanel contentPane;
 	private Partida partida;
 	private Image v;
-	private List<Canvas> p;
+
 	private JTextField dinero;
 	private Jugador jugador;
 	private Socket servidor;
@@ -46,63 +46,10 @@ public class TableroCliente extends JFrame {
 	private int click_dados;
 	private int click_comprar;
 
-	public void escuchandoServidor() {
-
-		Thread nuevosJugadores = new Thread(new Runnable() {
-			
-			
-			public void run() {
-				
-				ObjectInputStream ent=null;
-				DataOutputStream sal=null;
-				try (Socket servidor = new Socket("localhost", 7777);){
-					sal = new DataOutputStream(servidor.getOutputStream());
-					while (true) {
-						
-						sal.writeBytes("inicio" + "\r\n");
-						try {
-							ent = new ObjectInputStream(servidor.getInputStream());
-							List<Partida> partidas = (List<Partida>) ent.readObject();
-							int i = 0;
-							int indice = 0; // Obtenemos el indice de nuestra partida
-							for (Partida p : partidas) {
-								if (p.getId().equals(partida.getId())) {
-									indice = i;
-								}
-								i++;
-							}
-						System.out.println(partida.getJugadores());
-
-							if (partidas.get(indice).numero_jugadores() > partida.numero_jugadores()) {
-
-								partida.resetJugadores(partidas.get(indice).getJugadores());
-								// Resetea los jugadores para añadir el nuevo
-								System.out.println("Alguien se unio");
-								System.out.println(partida.getJugadores());
-
-							}
-
-						} catch (ClassNotFoundException e) {
-							e.printStackTrace();
-						}
-
-					}
-
-				} catch (UnknownHostException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-		nuevosJugadores.start();
-
-	}
-
+	
 	public TableroCliente(Partida c, Jugador j) {
 		setTitle("Partida");
-		this.p = new ArrayList<>();
+		
 		this.partida = c;
 		this.jugador = j;
 		this.click_dados = 0;
@@ -123,7 +70,7 @@ public class TableroCliente extends JFrame {
 			System.out.println(i);
 			canvas.setName(this.partida.getJugadores().get(i).getNombre());
 			System.out.println(canvas.getName());
-			this.p.add(canvas);
+			
 			canvas.setBounds(640 + suma, 567, 30, 28);
 
 			contentPane.add(canvas);
@@ -395,4 +342,74 @@ public class TableroCliente extends JFrame {
 			}
 		}
 	}
+	
+	
+	public void escuchandoServidor() {
+
+		Thread nuevosJugadores = new Thread(new Runnable() {
+
+			public void run() {
+
+				ObjectInputStream ent = null;
+				DataOutputStream sal = null;
+				try (Socket servidor = new Socket("localhost", 7777);) {
+					sal = new DataOutputStream(servidor.getOutputStream());
+					while (true) {
+
+						sal.writeBytes("inicio" + "\r\n");
+						try {
+							ent = new ObjectInputStream(servidor.getInputStream());
+							List<Partida> partidas = (List<Partida>) ent.readObject();
+							int i = 0;
+							int indice = 0; // Obtenemos el indice de nuestra partida
+							for (Partida p : partidas) {
+								if (p.getId().equals(partida.getId())) {
+									indice = i;
+								}
+								i++;
+							}
+							System.out.println(partida.getJugadores());
+
+							
+
+								for (Jugador jugador : partidas.get(indice).getJugadores()) {
+									if (!partida.estaJugador(jugador)) {
+										partida.nuevo_jugador(jugador);
+
+										System.out.println("Alguien se unio");
+										System.out.println(partida.getJugadores());
+										
+										Canvas canvas = new Canvas();
+										canvas.setName(jugador.getNombre());
+										canvas.setBackground(jugador.getColor());
+										contentPane.add(canvas,0);
+										jugadores_ficha.add(canvas);  
+										TableroCliente.this.DibujarFichaAvanza(0, jugador.getNombre());
+										
+									
+
+								System.out.println(jugadores_ficha);
+								System.out.println(partida.getJugadores());
+
+							}
+
+						} }catch (ClassNotFoundException e) {
+							e.printStackTrace();
+						}
+
+					}
+
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		nuevosJugadores.start();
+
+	
+	}
+
 }
