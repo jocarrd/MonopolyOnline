@@ -6,6 +6,7 @@ import java.util.List;
 
 import Monopoly.Jugador;
 import Monopoly.Partida;
+import javax.swing.JLabel;
 
 public class Pruebas  {
 	public static void main(String [] args) throws InterruptedException {
@@ -19,6 +20,14 @@ public class Pruebas  {
 		
 		 
 		TableroCliente c = new TableroCliente(p,v1);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(104, 368, 46, 14);
+		c.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(635, 117, 46, 14);
+		c.getContentPane().add(lblNewLabel_1);
 		
 
 			

@@ -292,6 +292,105 @@ public class TableroCliente extends JFrame {
 				if (posicion == 6) {
 					c.setBounds(330, 567, 30, 28);
 				}
+				if (posicion == 7) {
+					c.setBounds(280, 567, 30, 28);	
+				}
+				if (posicion == 8) {
+					c.setBounds(231, 567, 30, 28);
+				}
+				if (posicion == 9) {
+					c.setBounds(180, 567, 30, 28);
+				}
+				if (posicion == 10) {
+					c.setBounds(110, 567, 30, 28);
+				}
+				if (posicion == 11) {
+					c.setBounds(110, 517, 30, 28);
+				}
+				if (posicion == 12) {
+					c.setBounds(110, 467, 30, 28);
+				}
+				if (posicion == 13) {
+					c.setBounds(110, 417, 30, 28);
+				}
+				if (posicion == 14) {
+					c.setBounds(110, 367, 30, 28);
+				}
+				if (posicion == 15) {
+					c.setBounds(110, 317, 30, 28);
+				}
+				if (posicion == 16) {
+					c.setBounds(110, 267, 30, 28);
+				}
+				if (posicion == 17) {
+					c.setBounds(110, 217, 30, 28);
+				}
+				if (posicion == 18) {
+					c.setBounds(110, 167, 30, 28);
+				}
+				if (posicion == 19) {
+					c.setBounds(110, 117, 30, 28);
+				}
+				if (posicion == 20) {
+					c.setBounds(110, 67, 30, 28);
+				}
+				if (posicion == 21) {
+					c.setBounds(180, 67, 30, 28);
+				}
+				if (posicion == 22) {
+					c.setBounds(230, 67, 30, 28);
+				}
+				if (posicion == 23) {
+					c.setBounds(280, 67, 30, 28);
+				}
+				if (posicion == 24) {
+					c.setBounds(330, 67, 30, 28);
+				}
+				if (posicion == 25) {
+					c.setBounds(380, 67, 30, 28);
+				}
+				if (posicion == 26) {
+					c.setBounds(430, 67, 30, 28);
+				}
+				if (posicion == 27) {
+					c.setBounds(480, 67, 30, 28);
+				}
+				if (posicion == 28) {
+					c.setBounds(530, 67, 30, 28);
+				}
+				if (posicion == 29) {
+					c.setBounds(580, 67, 30, 28);
+				}
+				if (posicion == 30) {
+					c.setBounds(640, 67, 30, 28);
+				}
+				if (posicion == 31) {
+					c.setBounds(640, 117, 30, 28);
+				}
+				if (posicion == 32) {
+					c.setBounds(640, 167, 30, 28);
+				}
+				if (posicion == 33) {
+					c.setBounds(640, 217, 30, 28);
+				}
+				if (posicion == 34) {
+					c.setBounds(640, 267, 30, 28);
+				}
+				if (posicion == 35) {
+					c.setBounds(640, 317, 30, 28);
+				}
+				if (posicion == 36) {
+					c.setBounds(640, 367, 30, 28);
+				}
+				if (posicion == 37) {
+					c.setBounds(640, 417, 30, 28);
+				}
+				if (posicion == 38) {
+					c.setBounds(640, 467, 30, 28);
+				}
+				if (posicion == 39) {
+					c.setBounds(640, 517, 30, 28);
+				}
 
 			}
 		}
