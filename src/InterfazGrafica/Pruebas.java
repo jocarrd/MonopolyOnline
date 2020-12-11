@@ -13,7 +13,7 @@ public class Pruebas  {
 		Jugador v2 = new Jugador("Victor",Color.RED);
 		Partida p = new Partida("Partida 1");
 		
-		p.nuevo_jugador(v1);
+		p.nuevo_jugador(v1); 
 		p.nuevo_jugador(v2);
 		List<Partida> partidas = new ArrayList<>();
 		

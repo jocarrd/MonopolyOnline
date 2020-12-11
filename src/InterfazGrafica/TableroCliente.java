@@ -44,9 +44,11 @@ public class TableroCliente extends JFrame {
 	private Socket servidor;
 	private List<Canvas> jugadores_ficha = new ArrayList<>();
 	private int click_dados;
+	private int click_comprar;
 
 	public void escuchandoServidor() {
-
+		System.out.println("estamos aqui");
+		
 		Thread nuevosJugadores = new Thread(new Runnable() {
 
 			@Override
@@ -55,23 +57,24 @@ public class TableroCliente extends JFrame {
 					while (true) {
 						DataOutputStream sal = new DataOutputStream(servidor.getOutputStream());
 						ObjectInputStream ent = new ObjectInputStream(servidor.getInputStream());
-
+						
 						sal.writeBytes("inicio" + "\r\n");
 						try {
 							List<Partida> partidas = (List<Partida>) ent.readObject();
 							int i = 0;
-							int indice = 0;
+							int indice = 0;  //Obtenemos el indice de nuestra partida
 							for (Partida p : partidas) {
 								if (p.getId().equals(partida.getId())) {
 									indice = i;
 								}
 								i++;
 							}
-
+								System.out.println("hola");
 							if (partidas.get(indice).numero_jugadores() > partida.numero_jugadores()) {
 
 								partida.resetJugadores(partidas.get(indice).getJugadores());
 								// Resetea los jugadores para añadir el nuevo
+								System.out.println("Alguien se unio");
 
 							}
 
@@ -99,6 +102,7 @@ public class TableroCliente extends JFrame {
 		this.partida = c;
 		this.jugador = j;
 		this.click_dados = 0;
+		this.click_comprar=0;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setBounds(100, 100, 1347, 959);
@@ -152,14 +156,16 @@ public class TableroCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				List<Jugador> c = partida.getJugadores();
 
-				if (partida.getTurno() == c.indexOf(jugador) && click_dados != 0) {
-					Calle d = (Calle) partida.getTablero().getCasilla(jugador.getPosicion_tablero());
+				if (partida.getTurno() == c.indexOf(jugador) && click_dados != 0 && click_comprar==0) {
+					
 				 	if (partida.getTablero().getCasilla(jugador.getPosicion_tablero()).esunaCalle() ) {
-						jugador.anadir_propiedad(d);
+				 		Calle d = (Calle) partida.getTablero().getCasilla(jugador.getPosicion_tablero());
+				 		jugador.anadir_propiedad(d);
 						jugador.sacar_dinero(d.getPrecio_compra());
 						d.setPropietario(jugador);
 						informacion.setText("Compra realizada");
 						dinero.setText(String.valueOf((Math.round(jugador.getDinero()))));
+						click_comprar++;
 						
 					} else {
 						informacion.setText(" No puede comprar");
@@ -182,7 +188,6 @@ public class TableroCliente extends JFrame {
 					partida.pasarTurno();
 					System.out.println(partida.getTurno());
 					informacion.setText(jugador.getNombre() + " ,has pasado de turno");
-					System.out.println("He passado de turno");
 					click_dados--;
 
 				}

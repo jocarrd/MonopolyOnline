@@ -1,5 +1,6 @@
 package Online;
 
+import java.awt.Color;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,10 +19,15 @@ public class Servidor {
 	public static void main(String[] args) {
 
 		try (ServerSocket c = new ServerSocket(5555)) {
+			System.out.println("Servidor en marcha");
 			ExecutorService sesiones = Executors.newCachedThreadPool();
 			// NO METAS MAS DE 5 PARTIDAS sino F
 			List<Partida> partidas = new ArrayList<>();
 			Partida v1 = new Partida("Partida 1");
+			v1.nuevo_jugador(new Jugador("Jorgito",Color.BLUE));
+			v1.nuevo_jugador(new Jugador("Jorgito",Color.BLUE));
+			v1.nuevo_jugador(new Jugador("Jorgito",Color.BLUE));
+			
 			Partida v2 = new Partida("Partida 2");
 			Partida v3 = new Partida("Partida 3");
 			Partida v4 = new Partida("Partida 4");
@@ -30,7 +36,7 @@ public class Servidor {
 			partidas.add(v1);
 			partidas.add(v2);
 			partidas.add(v3);
-			partidas.add(v4);
+			partidas.add(v4); 
 			partidas.add(v5);
 
 			while (true) {
