@@ -48,7 +48,7 @@ public class SelecionPartida extends JFrame {
 		contentPane.add(bienvenida);
 
 		JLabel selecion = new JLabel("");
-		selecion.setFont(new Font("Power Green Small", Font.PLAIN, 22));
+		selecion.setFont(new Font("Power Green Small", Font.PLAIN, 22)); 
 		selecion.setForeground(Color.GREEN);
 		selecion.setBounds(352, 349, 104, 32);
 		contentPane.add(selecion);

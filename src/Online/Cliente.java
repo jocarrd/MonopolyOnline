@@ -20,13 +20,13 @@ public class Cliente {
 		DataOutputStream salida=null;
 		ObjectInputStream s =null;
 
-		try (Socket servidor = new Socket("localhost", 5555);) {
+		try (Socket servidor = new Socket("localhost", 7777);) {
 			salida = new DataOutputStream(servidor.getOutputStream());
 
 			salida.writeBytes("inicio" + "\r\n");
 			salida.flush();
 
-			 s = new ObjectInputStream(servidor.getInputStream());
+			 s = new ObjectInputStream(servidor.getInputStream()); 
 			
 			try {
 				List<Partida> partidas = (List<Partida>) s.readObject();

@@ -43,7 +43,7 @@ public class RegistrarJugador extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
+		textField = new JTextField(); 
 		textField.setBounds(68, 82, 86, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);

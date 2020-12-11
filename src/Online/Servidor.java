@@ -18,16 +18,16 @@ import Monopoly.Partida;
 public class Servidor {
 	public static void main(String[] args) {
 
-		try (ServerSocket c = new ServerSocket(5555)) {
+		try (ServerSocket c = new ServerSocket(7777)) {
 			System.out.println("Servidor en marcha");
 			ExecutorService sesiones = Executors.newCachedThreadPool();
 			// NO METAS MAS DE 5 PARTIDAS sino F
 			List<Partida> partidas = new ArrayList<>();
 			Partida v1 = new Partida("Partida 1");
-			v1.nuevo_jugador(new Jugador("Jorgito",Color.BLUE));
-			v1.nuevo_jugador(new Jugador("Jorgito",Color.BLUE));
-			v1.nuevo_jugador(new Jugador("Jorgito",Color.BLUE));
-			
+			v1.nuevo_jugador(new Jugador("Jorgito", Color.BLUE));
+			v1.nuevo_jugador(new Jugador("Jorgito", Color.BLUE));
+			v1.nuevo_jugador(new Jugador("Jorgito", Color.BLUE));
+
 			Partida v2 = new Partida("Partida 2");
 			Partida v3 = new Partida("Partida 3");
 			Partida v4 = new Partida("Partida 4");
@@ -36,13 +36,13 @@ public class Servidor {
 			partidas.add(v1);
 			partidas.add(v2);
 			partidas.add(v3);
-			partidas.add(v4); 
+			partidas.add(v4);
 			partidas.add(v5);
 
 			while (true) {
 
 				try {
-
+					System.out.println("Nuevo cliente");
 					Socket cliente = c.accept();
 
 					DataInputStream ent = new DataInputStream(cliente.getInputStream());
@@ -71,15 +71,11 @@ public class Servidor {
 
 							e.printStackTrace();
 						}
-						if(partidas.get(indice).numero_jugadores()>=partidas.get(indice).maxJugadores()) {
-							//No se puede unir a la partida
-						}else {
-							partidas.get(indice).nuevo_jugador(unir); //Jugador en la partida
+						if (partidas.get(indice).numero_jugadores() >= partidas.get(indice).maxJugadores()) {
+							// No se puede unir a la partida
+						} else {
+							partidas.get(indice).nuevo_jugador(unir); // Jugador en la partida
 						}
-						
-						
-						
-						
 
 					}
 

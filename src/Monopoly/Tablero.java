@@ -67,7 +67,7 @@ public class Tablero implements Serializable {
 			if (i == 0) {
 				Casilla c = new Casilla(i, "Salida", TipoCasilla.salida);  
 				this.casillas[i] = c;
-			}
+			} 
 
 			else if ((i  == 2) ||(i > 17) || (i > 33)) {
 				Casilla c = new Casilla(i, "Comunidad", TipoCasilla.comunidad); 

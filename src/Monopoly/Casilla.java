@@ -14,7 +14,7 @@ public class Casilla implements Serializable {
 	
 	public boolean esunaCalle() {
 		return tipoCasilla.equals(TipoCasilla.calle);
-			
+			 
 		
 	}
 	
