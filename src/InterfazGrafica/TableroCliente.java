@@ -42,6 +42,7 @@ public class TableroCliente extends JFrame {
 	private Jugador jugador;
 	private Socket servidor;
 	private List<Canvas> jugadores_ficha = new ArrayList<>();
+	private int click_dados;
 
 	public void escuchandoServidor() {
 
@@ -96,7 +97,7 @@ public class TableroCliente extends JFrame {
 		this.p = new ArrayList<>();
 		this.partida = c;
 		this.jugador = j;
-
+		this.click_dados=0;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setBounds(100, 100, 1347, 959);
@@ -171,6 +172,7 @@ public class TableroCliente extends JFrame {
 					System.out.println(partida.getTurno());
 					informacion.setText(jugador.getNombre() + " ,has pasado de turno");
 					System.out.println("He passado de turno");
+					click_dados--;
 
 				}
 
@@ -203,7 +205,7 @@ public class TableroCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				List<Jugador> c = partida.getJugadores();
 
-				if (partida.getTurno() == c.indexOf(jugador)) {
+				if (partida.getTurno() == c.indexOf(jugador) && click_dados==0) {
 
 					List<Integer> dados = partida.getDados();
 					dado1.setText(String.valueOf(dados.get(0)));
@@ -211,7 +213,7 @@ public class TableroCliente extends JFrame {
 
 					jugador.movimiento_tablero(dados.get(0) + dados.get(1));
 					DibujarFichaAvanza(jugador.getPosicion_tablero(), jugador.getNombre());
-
+					click_dados++;
 				}
 
 			}
