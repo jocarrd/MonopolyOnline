@@ -12,6 +12,7 @@ import Monopoly.Calle;
 import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import java.awt.SystemColor;
 
 public class MostrarPropiedades extends JFrame {
 
@@ -27,7 +28,7 @@ public class MostrarPropiedades extends JFrame {
 	 */
 	public MostrarPropiedades(List<Calle> propiedades) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 681, 420);
 		this.setTitle("Propiedades");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -35,22 +36,18 @@ public class MostrarPropiedades extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setBounds(42, 81, 315, 146);
+		textPane.setBackground(SystemColor.control);
+		textPane.setEditable(false);
+		textPane.setBounds(66, 87, 498, 248);
 		
 		for(Calle  c: propiedades) {
-			textPane.setText(textPane.getText()+"\r\n"+ c.getNombre()+" "+ Math.round(c.getAlquiler()));
+			textPane.setText(textPane.getText()+"\r\n"+ c.getNombre()+" "+ Math.round(c.getAlquiler())+"$");
 		}
 		contentPane.add(textPane);
 		
-		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(56, 41, 46, 14);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Alquiler");
-		lblNewLabel_1.setBounds(124, 41, 46, 14);
-		contentPane.add(lblNewLabel_1);
-		
 		 setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		 this.setResizable(false);
 		this.setVisible(true);
+	
 	}
 }

@@ -68,7 +68,7 @@ public class TableroCliente extends JFrame {
 			Canvas canvas = new Canvas();
 
 			canvas.setName(this.partida.getJugadores().get(i).getNombre());
-
+			
 			canvas.setBounds(640 + suma, 567, 30, 28);
 
 			contentPane.add(canvas);
