@@ -46,10 +46,9 @@ public class TableroCliente extends JFrame {
 	private int click_dados;
 	private int click_comprar;
 
-	
 	public TableroCliente(Partida c, Jugador j) {
 		setTitle("Partida");
-		
+
 		this.partida = c;
 		this.jugador = j;
 		this.click_dados = 0;
@@ -67,10 +66,9 @@ public class TableroCliente extends JFrame {
 			// Posicion inicial de los jugadores
 
 			Canvas canvas = new Canvas();
-			System.out.println(i);
+
 			canvas.setName(this.partida.getJugadores().get(i).getNombre());
-			System.out.println(canvas.getName());
-			
+
 			canvas.setBounds(640 + suma, 567, 30, 28);
 
 			contentPane.add(canvas);
@@ -240,7 +238,7 @@ public class TableroCliente extends JFrame {
 					c.setBounds(330, 567, 30, 28);
 				}
 				if (posicion == 7) {
-					c.setBounds(280, 567, 30, 28);	
+					c.setBounds(280, 567, 30, 28);
 				}
 				if (posicion == 8) {
 					c.setBounds(231, 567, 30, 28);
@@ -342,8 +340,7 @@ public class TableroCliente extends JFrame {
 			}
 		}
 	}
-	
-	
+
 	public void escuchandoServidor() {
 
 		Thread nuevosJugadores = new Thread(new Runnable() {
@@ -355,7 +352,7 @@ public class TableroCliente extends JFrame {
 				try (Socket servidor = new Socket("localhost", 7777);) {
 					sal = new DataOutputStream(servidor.getOutputStream());
 					while (true) {
-
+						
 						sal.writeBytes("inicio" + "\r\n");
 						try {
 							ent = new ObjectInputStream(servidor.getInputStream());
@@ -370,30 +367,30 @@ public class TableroCliente extends JFrame {
 							}
 							System.out.println(partida.getJugadores());
 
-							
+							for (Jugador jugador : partidas.get(indice).getJugadores()) {
+								
+								if (!partida.estaJugador(jugador)) {
+									partida.nuevo_jugador(jugador);
 
-								for (Jugador jugador : partidas.get(indice).getJugadores()) {
-									if (!partida.estaJugador(jugador)) {
-										partida.nuevo_jugador(jugador);
+									System.out.println("Alguien se unio");
+									System.out.println(partida.getJugadores());
 
-										System.out.println("Alguien se unio");
-										System.out.println(partida.getJugadores());
-										
-										Canvas canvas = new Canvas();
-										canvas.setName(jugador.getNombre());
-										canvas.setBackground(jugador.getColor());
-										contentPane.add(canvas,0);
-										jugadores_ficha.add(canvas);  
-										TableroCliente.this.DibujarFichaAvanza(0, jugador.getNombre());
-										
+									Canvas canvas = new Canvas();
+									canvas.setName(jugador.getNombre());
+									canvas.setBackground(jugador.getColor());
+									contentPane.add(canvas, 0);
+									canvas.setBounds(582, 567, 30, 28);
+									jugadores_ficha.add(canvas);
+									TableroCliente.this.DibujarFichaAvanza(0, jugador.getNombre());
+
+									System.out.println(jugadores_ficha);
 									
 
-								System.out.println(jugadores_ficha);
+								}
 								System.out.println(partida.getJugadores());
 
 							}
-
-						} }catch (ClassNotFoundException e) {
+						} catch (ClassNotFoundException e) {
 							e.printStackTrace();
 						}
 
@@ -409,7 +406,6 @@ public class TableroCliente extends JFrame {
 
 		nuevosJugadores.start();
 
-	
 	}
 
 }

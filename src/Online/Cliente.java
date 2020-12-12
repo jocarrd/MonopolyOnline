@@ -11,6 +11,7 @@ import java.util.List;
 
 import InterfazGrafica.RegistrarJugador;
 import InterfazGrafica.SelecionPartida;
+import InterfazGrafica.TableroCliente;
 import Monopoly.Jugador;
 import Monopoly.Partida;
 
@@ -43,12 +44,14 @@ public class Cliente {
 				}
 				Partida jugar = seleccion.getPartida();
 				
-				
+				System.out.println("ey");
 				//inicio proceso unirse a partida
 				salida.writeBytes("unir a partida" +"\r\n");
 				salida.writeBytes(jugar.getId() +"\r\n" );
 				ObjectOutputStream envioclases = new ObjectOutputStream(salida);
 				envioclases.writeObject(jugador);
+				
+				TableroCliente interfaz = new TableroCliente(jugar,jugador);
 				
 				
 				

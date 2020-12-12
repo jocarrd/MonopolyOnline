@@ -88,11 +88,11 @@ public class Tablero implements Serializable {
 				this.casillas[i] = c;
 			}
 
-			else if ((i == 10)&&(i == 30))  {
+			else if ((i == 10)||(i == 30))  {
 				Casilla c = new Casilla(i, "Carcel", TipoCasilla.carcel); 
 				this.casillas[i] = c;
 
-			} else if ((i == 7) && (i == 22)&& (i == 36)) {
+			} else if ((i == 7) || (i == 22)|| (i == 36)) {
 				Casilla c = new Casilla(i, "Sorpresa", TipoCasilla.sorpresa); 
 				this.casillas[i] = c;
 			} else if (i == 20) {
@@ -112,7 +112,7 @@ public class Tablero implements Serializable {
 
 		}
 			
-			//System.out.println(this.casillas[i].esunaCalle());
+			System.out.println(this.casillas[i].esunaCalle());
 	}
 
 }

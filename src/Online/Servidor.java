@@ -16,17 +16,18 @@ import Monopoly.Jugador;
 import Monopoly.Partida;
 
 public class Servidor {
+
+	private static List<Partida> partidas = new ArrayList<>();
+
 	public static void main(String[] args) {
 
 		try (ServerSocket c = new ServerSocket(7777)) {
 			System.out.println("Servidor en marcha");
 			ExecutorService sesiones = Executors.newCachedThreadPool();
 			// NO METAS MAS DE 5 PARTIDAS sino F
-			List<Partida> partidas = new ArrayList<>();
+
 			Partida v1 = new Partida("Partida 1");
-			v1.nuevo_jugador(new Jugador("Jorgito", Color.BLUE));
-			v1.nuevo_jugador(new Jugador("Jorgito", Color.BLUE));
-			v1.nuevo_jugador(new Jugador("Jorgito", Color.BLUE));
+			v1.nuevo_jugador(new Jugador("pepe", Color.BLUE));
 
 			Partida v2 = new Partida("Partida 2");
 			Partida v3 = new Partida("Partida 3");
@@ -42,9 +43,9 @@ public class Servidor {
 			while (true) {
 
 				try {
-					System.out.println("Nuevo cliente");
+					
 					Socket cliente = c.accept();
-
+					System.out.println("Nuevo cliente");
 					DataInputStream ent = new DataInputStream(cliente.getInputStream());
 
 					if (ent.readLine().equals("inicio")) {
@@ -55,40 +56,53 @@ public class Servidor {
 
 					if (ent.readLine().equals("unir a partida")) {
 						String id_partida = ent.readLine();
-						int i = 0;
-						int indice = 0;
-						for (Partida p : partidas) {
-							if (p.getId().equals(id_partida)) {
-								indice = i;
-							}
-							i++;
-						}
+
 						ObjectInputStream s = new ObjectInputStream(ent);
 						Jugador unir = null;
 						try {
 							unir = (Jugador) s.readObject();
+							Partida encontrada = Servidor.buscaPartida(id_partida);
+							System.out.println(encontrada.getJugadores());
+							if (encontrada.numero_jugadores() >= encontrada.maxJugadores()) {
+								// No se puede unir a la partida
+								
+							} else {
+								encontrada.nuevo_jugador(unir); // Jugador en la partida
+								System.out.println("añade");
+								System.out.println(encontrada.getJugadores());
+							}
 						} catch (ClassNotFoundException e) {
 
 							e.printStackTrace();
 						}
-						if (partidas.get(indice).numero_jugadores() >= partidas.get(indice).maxJugadores()) {
-							// No se puede unir a la partida
-						} else {
-							partidas.get(indice).nuevo_jugador(unir); // Jugador en la partida
-						}
 
 					}
+					
+					
+
+					
 
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 			}
+		} catch (IOException e1) {
 
-		} catch (IOException e) {
+			e1.printStackTrace();
+		}
+	}
 
-			e.printStackTrace();
+	public static Partida buscaPartida(String id) {
+
+		for (Partida p : Servidor.partidas) {
+			if (p.getId().equals(id)) {
+				return p;
+			}
+
 		}
 
+		return null;
 	}
+
 }
