@@ -51,7 +51,7 @@ public class Calle extends Casilla implements Serializable {
 	}
 	
 	public boolean TienePropietario() {
-		return this.Propietario==null;
+		return this.Propietario!=null;
 	}
 
 	public void setPropietario(Jugador tienePropietario) {

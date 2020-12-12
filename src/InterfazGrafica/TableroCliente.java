@@ -105,17 +105,20 @@ public class TableroCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				List<Jugador> c = partida.getJugadores();
 
-				if (partida.getTurno() == c.indexOf(jugador) && click_dados != 0 && click_comprar == 0) {
+				if (partida.getTurno() == c.indexOf(jugador) && click_dados != 0 && click_comprar == 0 ) {
 
-					if (partida.getTablero().getCasilla(jugador.getPosicion_tablero()).esunaCalle()) {
+					if (partida.getTablero().getCasilla(jugador.getPosicion_tablero()).esunaCalle() ) {
 						Calle d = (Calle) partida.getTablero().getCasilla(jugador.getPosicion_tablero());
+						if(!d.TienePropietario()) {
 						jugador.anadir_propiedad(d);
 						jugador.sacar_dinero(d.getPrecio_compra());
 						d.setPropietario(jugador);
 						informacion.setText("Compra realizada");
 						dinero.setText(String.valueOf((Math.round(jugador.getDinero()))));
 						click_comprar++;
-
+						}else {
+							informacion.setText(" Tiene propietario");
+						}
 					} else {
 						informacion.setText(" No puede comprar");
 					}
