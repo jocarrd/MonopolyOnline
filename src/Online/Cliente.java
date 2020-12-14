@@ -43,13 +43,19 @@ public class Cliente {
 					
 				}
 				Partida jugar = seleccion.getPartida();
+				jugar.nuevo_jugador(jugador);
 				
-				System.out.println("ey");
+				
 				//inicio proceso unirse a partida
 				salida.writeBytes("unir a partida" +"\r\n");
 				salida.writeBytes(jugar.getId() +"\r\n" );
+				salida.flush();
 				ObjectOutputStream envioclases = new ObjectOutputStream(salida);
 				envioclases.writeObject(jugador);
+				envioclases.flush();
+				
+				jugar.getJugadores();
+				
 				
 				TableroCliente interfaz = new TableroCliente(jugar,jugador);
 				

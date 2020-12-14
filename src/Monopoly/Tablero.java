@@ -112,7 +112,7 @@ public class Tablero implements Serializable {
 
 		}
 			
-			System.out.println(this.casillas[i].esunaCalle());
+			
 	}
 
 }

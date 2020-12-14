@@ -27,7 +27,7 @@ public class Servidor {
 			// NO METAS MAS DE 5 PARTIDAS sino F
 
 			Partida v1 = new Partida("Partida 1");
-			v1.nuevo_jugador(new Jugador("pepe", Color.BLUE));
+			
 
 			Partida v2 = new Partida("Partida 2");
 			Partida v3 = new Partida("Partida 3");
@@ -43,7 +43,7 @@ public class Servidor {
 			while (true) {
 
 				try {
-					
+
 					Socket cliente = c.accept();
 					System.out.println("Nuevo cliente");
 					DataInputStream ent = new DataInputStream(cliente.getInputStream());
@@ -57,7 +57,7 @@ public class Servidor {
 					if (ent.readLine().equals("unir a partida")) {
 						String id_partida = ent.readLine();
 
-						ObjectInputStream s = new ObjectInputStream(ent);
+						ObjectInputStream s = new ObjectInputStream(cliente.getInputStream());
 						Jugador unir = null;
 						try {
 							unir = (Jugador) s.readObject();
@@ -65,9 +65,14 @@ public class Servidor {
 							System.out.println(encontrada.getJugadores());
 							if (encontrada.numero_jugadores() >= encontrada.maxJugadores()) {
 								// No se puede unir a la partida
-								
+
 							} else {
-								encontrada.nuevo_jugador(unir); // Jugador en la partida
+								List<Jugador> jugadores = encontrada.getJugadores();
+								jugadores.add(0, unir); //Añadimos el jugador al principio
+
+								encontrada.setJugadores(jugadores);
+
+								// Jugador en la partida
 								System.out.println("añade");
 								System.out.println(encontrada.getJugadores());
 							}
@@ -77,10 +82,22 @@ public class Servidor {
 						}
 
 					}
-					
-					
 
-					
+					/*
+					  if(ent.readLine().equals("cambiar turno")) {
+					  
+					  String id_partida = ent.readLine(); 
+					  Partida cambiar =Servidor.buscaPartida(id_partida); 
+					  cambiar.pasarTurno();
+					  
+					  System.out.println("He cambiado de turno");
+					  
+					  
+					  }
+					  
+					  */
+					  
+					 
 
 				} catch (IOException e) {
 					e.printStackTrace();

@@ -48,7 +48,6 @@ public class TableroCliente extends JFrame {
 
 	public TableroCliente(Partida c, Jugador j) {
 		setTitle("Partida");
-
 		this.partida = c;
 		this.jugador = j;
 		this.click_dados = 0;
@@ -68,7 +67,7 @@ public class TableroCliente extends JFrame {
 			Canvas canvas = new Canvas();
 
 			canvas.setName(this.partida.getJugadores().get(i).getNombre());
-			
+
 			canvas.setBounds(640 + suma, 567, 30, 28);
 
 			contentPane.add(canvas);
@@ -105,18 +104,18 @@ public class TableroCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				List<Jugador> c = partida.getJugadores();
 
-				if (partida.getTurno() == c.indexOf(jugador) && click_dados != 0 && click_comprar == 0 ) {
+				if (partida.getTurno() == c.indexOf(jugador) && click_dados != 0 && click_comprar == 0) {
 
-					if (partida.getTablero().getCasilla(jugador.getPosicion_tablero()).esunaCalle() ) {
+					if (partida.getTablero().getCasilla(jugador.getPosicion_tablero()).esunaCalle()) {
 						Calle d = (Calle) partida.getTablero().getCasilla(jugador.getPosicion_tablero());
-						if(!d.TienePropietario()) {
-						jugador.anadir_propiedad(d);
-						jugador.sacar_dinero(d.getPrecio_compra());
-						d.setPropietario(jugador);
-						informacion.setText("Compra realizada");
-						dinero.setText(String.valueOf((Math.round(jugador.getDinero()))));
-						click_comprar++;
-						}else {
+						if (!d.TienePropietario()) {
+							jugador.anadir_propiedad(d);
+							jugador.sacar_dinero(d.getPrecio_compra());
+							d.setPropietario(jugador);
+							informacion.setText("Compra realizada");
+							dinero.setText(String.valueOf((Math.round(jugador.getDinero()))));
+							click_comprar++;
+						} else {
 							informacion.setText(" Tiene propietario");
 						}
 					} else {
@@ -141,6 +140,7 @@ public class TableroCliente extends JFrame {
 					System.out.println(partida.getTurno());
 					informacion.setText(jugador.getNombre() + " ,has pasado de turno");
 					click_dados--;
+					
 
 				}
 
@@ -355,7 +355,7 @@ public class TableroCliente extends JFrame {
 				try (Socket servidor = new Socket("localhost", 7777);) {
 					sal = new DataOutputStream(servidor.getOutputStream());
 					while (true) {
-						
+
 						sal.writeBytes("inicio" + "\r\n");
 						try {
 							ent = new ObjectInputStream(servidor.getInputStream());
@@ -377,6 +377,7 @@ public class TableroCliente extends JFrame {
 
 									System.out.println("Alguien se unio");
 									System.out.println(partida.getJugadores());
+									
 
 									Canvas canvas = new Canvas();
 									canvas.setName(jugador.getNombre());
@@ -387,10 +388,9 @@ public class TableroCliente extends JFrame {
 									TableroCliente.this.DibujarFichaAvanza(0, jugador.getNombre());
 
 									System.out.println(jugadores_ficha);
-									
 
 								}
-								System.out.println(partida.getJugadores());
+								
 
 							}
 						} catch (ClassNotFoundException e) {
@@ -408,6 +408,23 @@ public class TableroCliente extends JFrame {
 		});
 
 		nuevosJugadores.start();
+
+	}
+
+	public void cambiarTurnoTablero() {
+
+		DataOutputStream salida =null;
+		try (Socket servidor = new Socket("localhost", 7777)) {
+			
+			salida = new DataOutputStream(servidor.getOutputStream());
+			salida.writeBytes("cambiar turno"+"\r\n");
+			salida.writeBytes(partida.getId()+"\r\n");
+
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

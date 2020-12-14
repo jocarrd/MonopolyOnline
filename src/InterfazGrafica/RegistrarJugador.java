@@ -53,7 +53,7 @@ public class RegistrarJugador extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"RED", "BLACK", "ORANGE", "PINK", "PURPLE", "YELLOW", "WHITE", "BLUE", "BROWN"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"RED", "BLACK", "ORANGE", "PINK", "MAGENTA", "YELLOW", "WHITE", "BLUE", "CYAN"}));
 		comboBox.setBounds(251, 81, 86, 22);
 		contentPane.add(comboBox);
 		
@@ -62,8 +62,41 @@ public class RegistrarJugador extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String selecionado = (String)comboBox.getSelectedItem();
-				Color c = Color.getColor(selecionado);
-				//No seleciona bien el color , buscar solucion
+				
+				Color c=null;
+				
+				if(selecionado.equals("RED")) {
+					c = Color.RED;
+				}
+				else if(selecionado.equals("BLACK")) {
+					c= Color.BLACK;
+				}
+				
+				else if (selecionado.equals("ORANGE")) {
+					c= Color.ORANGE;
+				}
+				
+				else if (selecionado.equals("PINK")) {
+					c = Color.PINK;
+				}
+				
+				else if (selecionado.equals("MAGENTA")) {
+					c = Color.MAGENTA;
+				}
+				else if (selecionado.equals("YELLOW")) {
+					c = Color.YELLOW;
+				}
+				else if (selecionado.equals("WHITE")) {
+					c = Color.WHITE;
+				}
+				else if (selecionado.equals("BLUE")) {
+					c = Color.BLUE;
+				}
+				else if (selecionado.equals("BROWN")) {
+					c = Color.CYAN;
+				}
+				
+
 				
 				Jugador nuevo = new Jugador(textField.getText(),c);
 				jugadorCreado=nuevo;
