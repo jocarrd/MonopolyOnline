@@ -43,7 +43,7 @@ public class Cliente {
 					
 				}
 				Partida jugar = seleccion.getPartida();
-				jugar.nuevo_jugador(jugador);
+				jugar.getJugadores().add(0, jugador); //Prueba para que me deje lanzar dados
 				
 				
 				//inicio proceso unirse a partida

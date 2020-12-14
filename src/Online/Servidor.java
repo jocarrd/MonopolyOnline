@@ -28,7 +28,7 @@ public class Servidor {
 
 			Partida v1 = new Partida("Partida 1");
 			
-
+			v1.nuevo_jugador( new Jugador("joselito", Color.BLUE));
 			Partida v2 = new Partida("Partida 2");
 			Partida v3 = new Partida("Partida 3");
 			Partida v4 = new Partida("Partida 4");
@@ -85,8 +85,8 @@ public class Servidor {
 					}
 
 					
-					
-					/*  if(ent.readLine().equals("cambiar turno")) {
+					//Null pointer exception en el servidor ... buscar solucion...
+					  if(ent.readLine().equals("cambiar turno")) {
 					  
 					  String id_partida = ent.readLine(); 
 					  Partida cambiar =Servidor.buscaPartida(id_partida); 
@@ -98,7 +98,7 @@ public class Servidor {
 					  }
 					  
 					  
-					  */
+					  
 					 
 
 				} catch (IOException e) {

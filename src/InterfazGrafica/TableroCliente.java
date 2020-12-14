@@ -140,6 +140,7 @@ public class TableroCliente extends JFrame {
 					System.out.println(partida.getTurno());
 					informacion.setText(jugador.getNombre() + " ,has pasado de turno");
 					click_dados--;
+					cambiarTurnoTablero();
 					
 
 				}
