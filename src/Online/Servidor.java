@@ -53,6 +53,7 @@ public class Servidor {
 						s.writeObject(partidas);
 						s.flush();
 					}
+					
 
 					if (ent.readLine().equals("unir a partida")) {
 						String id_partida = ent.readLine();
@@ -68,7 +69,7 @@ public class Servidor {
 
 							} else {
 								List<Jugador> jugadores = encontrada.getJugadores();
-								jugadores.add(0, unir); //Añadimos el jugador al principio
+								jugadores.add(unir); //Añadimos el jugador al principio
 
 								encontrada.setJugadores(jugadores);
 
@@ -83,8 +84,9 @@ public class Servidor {
 
 					}
 
-					/*
-					  if(ent.readLine().equals("cambiar turno")) {
+					
+					
+					/*  if(ent.readLine().equals("cambiar turno")) {
 					  
 					  String id_partida = ent.readLine(); 
 					  Partida cambiar =Servidor.buscaPartida(id_partida); 
@@ -95,8 +97,8 @@ public class Servidor {
 					  
 					  }
 					  
-					  */
 					  
+					  */
 					 
 
 				} catch (IOException e) {

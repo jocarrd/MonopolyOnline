@@ -54,7 +54,7 @@ public class Cliente {
 				envioclases.writeObject(jugador);
 				envioclases.flush();
 				
-				jugar.getJugadores();
+				
 				
 				
 				TableroCliente interfaz = new TableroCliente(jugar,jugador);

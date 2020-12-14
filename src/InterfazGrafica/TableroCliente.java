@@ -345,21 +345,31 @@ public class TableroCliente extends JFrame {
 	}
 
 	public void escuchandoServidor() {
+		
+		
+		
+		
 
 		Thread nuevosJugadores = new Thread(new Runnable() {
 
 			public void run() {
-
+				System.out.println("ey");
 				ObjectInputStream ent = null;
 				DataOutputStream sal = null;
 				try (Socket servidor = new Socket("localhost", 7777);) {
+					
 					sal = new DataOutputStream(servidor.getOutputStream());
+					ent = new ObjectInputStream(servidor.getInputStream());
+					
 					while (true) {
-
+						
 						sal.writeBytes("inicio" + "\r\n");
+						
 						try {
-							ent = new ObjectInputStream(servidor.getInputStream());
+							
+							
 							List<Partida> partidas = (List<Partida>) ent.readObject();
+							
 							int i = 0;
 							int indice = 0; // Obtenemos el indice de nuestra partida
 							for (Partida p : partidas) {
@@ -371,7 +381,7 @@ public class TableroCliente extends JFrame {
 							System.out.println(partida.getJugadores());
 
 							for (Jugador jugador : partidas.get(indice).getJugadores()) {
-								
+								System.out.println("ey");
 								if (!partida.estaJugador(jugador)) {
 									partida.nuevo_jugador(jugador);
 
@@ -404,10 +414,29 @@ public class TableroCliente extends JFrame {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				
+				finally {
+					try {
+						sal.close();
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+					
+					try {
+						ent.close();
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}
 			}
 		});
+		
+		
 
 		nuevosJugadores.start();
+		
 
 	}
 
