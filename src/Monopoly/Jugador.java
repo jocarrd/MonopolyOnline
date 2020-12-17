@@ -10,25 +10,26 @@ public class Jugador implements Serializable {
 	private List<Calle> propiedades;
 	private double dinero;
 	private int posicion_tablero;
-	private  Color c ;
+	private Color c;
+//	private int turno;
 
-	public Jugador(String nom,Color c) {
-		//Se pone en la casilla de salida al jugador
-		
+	public Jugador(String nom, Color c) {
+		// Se pone en la casilla de salida al jugador
+
 		this.nombre = nom;
 		this.propiedades = new ArrayList<>();
 		this.dinero = 2000;
 		this.posicion_tablero = 0;
-		this.c=c;
+		this.c = c;
 	}
-	
+
 	public Color getColor() {
 		return this.c;
 	}
 
 	public String getNombre() {
 		return nombre;
-	} 
+	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -49,7 +50,7 @@ public class Jugador implements Serializable {
 	public void setPosicion_tablero(int posicion_tablero) {
 		this.posicion_tablero = posicion_tablero;
 	}
-	
+
 	public List<Calle> getPropiedades() {
 		return this.propiedades;
 	}
@@ -65,11 +66,10 @@ public class Jugador implements Serializable {
 	public void movimiento_tablero(int c) {
 		if (this.posicion_tablero + c >= Tablero.tam) {
 			this.posicion_tablero = (this.posicion_tablero + c) - Tablero.tam;
-		}else {
+		} else {
 			this.posicion_tablero = this.posicion_tablero + c;
 		}
 
-		
 	}
 
 	public boolean anadir_propiedad(Calle c) {
@@ -91,5 +91,13 @@ public class Jugador implements Serializable {
 		return false;
 
 	}
+	
+//	public int getTurno() {
+//		return this.turno;
+//	}
+//	
+//	public void setTurno(int i) {
+//		this.turno = i;
+//	}
 
 }

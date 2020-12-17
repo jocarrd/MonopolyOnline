@@ -17,9 +17,9 @@ import Monopoly.Partida;
 
 public class Cliente {
 	public static void main(String[] args) {
-		RegistrarJugador registro=null;
-		DataOutputStream salida=null;
-		ObjectInputStream s =null;
+		RegistrarJugador registro = null;
+		DataOutputStream salida = null;
+		ObjectInputStream s = null;
 
 		try (Socket servidor = new Socket("localhost", 7777);) {
 			salida = new DataOutputStream(servidor.getOutputStream());
@@ -27,71 +27,57 @@ public class Cliente {
 			salida.writeBytes("inicio" + "\r\n");
 			salida.flush();
 
-			 s = new ObjectInputStream(servidor.getInputStream()); 
-			
+			s = new ObjectInputStream(servidor.getInputStream());
+
 			try {
 				List<Partida> partidas = (List<Partida>) s.readObject();
 				registro = new RegistrarJugador();
 
-				while(registro.isShowing()) {
-					
+				while (registro.isShowing()) {
+
 				}
-				Jugador jugador= registro.getJugador(); //Jugador Registrado
+				Jugador jugador = registro.getJugador(); // Jugador Registrado
 				SelecionPartida seleccion = new SelecionPartida(partidas);
-				
-				while(seleccion.isShowing()) {
-					
+
+				while (seleccion.isShowing()) {
+
 				}
 				Partida jugar = seleccion.getPartida();
-				jugar.getJugadores().add(0, jugador); //Prueba para que me deje lanzar dados
-				
-				
-				//inicio proceso unirse a partida
-				salida.writeBytes("unir a partida" +"\r\n");
-				salida.writeBytes(jugar.getId() +"\r\n" );
+				jugar.getJugadores().add(0, jugador); // Prueba para que me deje lanzar dados
+
+				// inicio proceso unirse a partida
+				salida.writeBytes("unir a partida" + "\r\n");
+				salida.writeBytes(jugar.getId() + "\r\n");
 				salida.flush();
 				ObjectOutputStream envioclases = new ObjectOutputStream(salida);
 				envioclases.writeObject(jugador);
 				envioclases.flush();
-				
-				
-				
-				
-				TableroCliente interfaz = new TableroCliente(jugar,jugador);
-				
-				
-				
-				
-				
-				
-				
-				
+
+				TableroCliente interfaz = new TableroCliente(jugar, jugador);
+
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 
-			
-
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		finally {
-			if(salida!=null)
+		} finally {
+			if (salida != null)
 				try {
 					salida.close();
 				} catch (IOException e1) {
-					
+
 					e1.printStackTrace();
 				}
-			
-			if(s!=null)
+
+			if (s != null)
 				try {
 					s.close();
 				} catch (IOException e) {
-					
+
 					e.printStackTrace();
 				}
-			}
+		}
 
 	}
 

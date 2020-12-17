@@ -27,8 +27,8 @@ public class Servidor {
 			// NO METAS MAS DE 5 PARTIDAS sino F
 
 			Partida v1 = new Partida("Partida 1");
-			
-			v1.nuevo_jugador( new Jugador("joselito", Color.BLUE));
+
+			v1.nuevo_jugador(new Jugador("joselito", Color.BLUE));
 			Partida v2 = new Partida("Partida 2");
 			Partida v3 = new Partida("Partida 3");
 			Partida v4 = new Partida("Partida 4");
@@ -53,7 +53,6 @@ public class Servidor {
 						s.writeObject(partidas);
 						s.flush();
 					}
-					
 
 					if (ent.readLine().equals("unir a partida")) {
 						String id_partida = ent.readLine();
@@ -65,12 +64,14 @@ public class Servidor {
 							Partida encontrada = Servidor.buscaPartida(id_partida);
 							System.out.println(encontrada.getJugadores());
 							if (encontrada.numero_jugadores() >= encontrada.maxJugadores()) {
-								// No se puede unir a la partida
+								// No se puede unir a la partida --> un messageBox que diga que no se puede unir
 
 							} else {
 								List<Jugador> jugadores = encontrada.getJugadores();
-								jugadores.add(unir); //Añadimos el jugador al principio
-
+								jugadores.add(unir); // Añadimos el jugador al principio
+								
+								//unir.setTurno(jugadores.size());  // o jugadores.size()-1 dependiendo de queremos que empiece en 0 o 1
+									
 								encontrada.setJugadores(jugadores);
 
 								// Jugador en la partida
@@ -84,22 +85,16 @@ public class Servidor {
 
 					}
 
-					
-					//Null pointer exception en el servidor ... buscar solucion...
-					  if(ent.readLine().equals("cambiar turno")) {
-					  
-					  String id_partida = ent.readLine(); 
-					  Partida cambiar =Servidor.buscaPartida(id_partida); 
-					  cambiar.pasarTurno();
-					  
-					  System.out.println("He cambiado de turno");
-					  
-					  
-					  }
-					  
-					  
-					  
-					 
+					// Null pointer exception en el servidor ... buscar solucion...
+					if (ent.readLine().equals("cambiar turno")) {
+
+						String id_partida = ent.readLine();
+						Partida cambiar = Servidor.buscaPartida(id_partida);
+						cambiar.pasarTurno();
+
+						System.out.println("He cambiado de turno");
+
+					}
 
 				} catch (IOException e) {
 					e.printStackTrace();

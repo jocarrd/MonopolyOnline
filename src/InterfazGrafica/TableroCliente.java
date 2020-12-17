@@ -448,7 +448,7 @@ public class TableroCliente extends JFrame {
 			
 			salida = new DataOutputStream(servidor.getOutputStream());
 			salida.writeBytes("cambiar turno"+"\r\n");
-			salida.writeBytes(partida.getId()+"\r\n");
+			salida.writeBytes(partida.getId()+"+++\r\n");
 
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
