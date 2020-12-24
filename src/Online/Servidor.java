@@ -68,12 +68,18 @@ public class Servidor {
 							unir = (Jugador) s.readObject();
 							Partida encontrada = Servidor.buscaPartida(id_partida);
 							System.out.println(encontrada.getJugadores());
-							
-							if (encontrada.numero_jugadores() < encontrada.maxJugadores()) {
-								Servidor.buscaSalaPartida(id_partida).anadirJugador(cliente, unir);
-								System.out.println(encontrada.getJugadores());
-							}
+							if (encontrada.numero_jugadores() >= encontrada.maxJugadores()) {
+					
 
+							} else {
+
+								
+								Servidor.buscaSalaPartida(id_partida).anadirJugador(cliente, unir);
+								
+								System.out.println(encontrada.getJugadores());
+								
+								
+							}
 						} catch (ClassNotFoundException e) {
 
 							e.printStackTrace();
@@ -81,6 +87,8 @@ public class Servidor {
 
 					}
 
+					
+				
 
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -116,6 +124,8 @@ public class Servidor {
 
 		return null;
 	}
+	
+	
 	
 	
 	public static List<Partida> getPartidas(){
