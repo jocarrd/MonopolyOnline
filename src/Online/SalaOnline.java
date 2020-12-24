@@ -29,11 +29,12 @@ public class SalaOnline extends Thread {
 					String lectura =ent.readLine();
 					
 					if(lectura.equals("pasoturno")) {
-						System.out.println("Ojo que funciona");
-						ObjectInputStream s = new ObjectInputStream(d.getInputStream());
+						
+						ObjectInputStream s = new ObjectInputStream(ent);
 						Partida actualizada =(Partida) s.readObject();
 						this.partida=actualizada;
 						this.Broadcast();
+						System.out.println("El servidor notifica cambio de turno");
 						
 						break;
 					}
