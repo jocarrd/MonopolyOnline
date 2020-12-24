@@ -38,15 +38,15 @@ public class TableroCliente extends JFrame {
 	private JPanel contentPane;
 	private Partida partida;
 	private Image v;
-
+	private Socket conexion;
 	private JTextField dinero;
 	private Jugador jugador;
-	private Socket servidor;
 	private List<Canvas> jugadores_ficha = new ArrayList<>();
 	private int click_dados;
 	private int click_comprar;
 
-	public TableroCliente(Partida c, Jugador j) {
+	public TableroCliente(Partida c, Jugador j,Socket conexion) {
+		this.conexion=conexion;
 		setTitle("Partida");
 		this.partida = c;
 		this.jugador = j;
@@ -140,7 +140,7 @@ public class TableroCliente extends JFrame {
 					System.out.println(partida.getTurno());
 					informacion.setText(jugador.getNombre() + " ,has pasado de turno");
 					click_dados--;
-					cambiarTurnoTablero();
+					
 					
 
 				}
@@ -207,7 +207,7 @@ public class TableroCliente extends JFrame {
 		label_1.setBounds(534, 591, 46, 14);
 		contentPane.add(label_1);
 
-		this.escuchandoServidor();
+		
 		this.setResizable(false);
 
 		this.setVisible(true);
@@ -345,117 +345,9 @@ public class TableroCliente extends JFrame {
 		}
 	}
 
-	public void escuchandoServidor() {
-		
-		
-		
-		
-
-		Thread nuevosJugadores = new Thread(new Runnable() {
-
-			public void run() {
-				System.out.println("ey");
-				ObjectInputStream ent = null;
-				DataOutputStream sal = null;
-				try (Socket servidor = new Socket("localhost", 7777);) {
-					
-					sal = new DataOutputStream(servidor.getOutputStream());
-					ent = new ObjectInputStream(servidor.getInputStream());
-					
-					while (true) {
-						
-						sal.writeBytes("inicio" + "\r\n");
-						
-						try {
+	
 							
-							
-							List<Partida> partidas = (List<Partida>) ent.readObject();
-							
-							int i = 0;
-							int indice = 0; // Obtenemos el indice de nuestra partida
-							for (Partida p : partidas) {
-								if (p.getId().equals(partida.getId())) {
-									indice = i;
-								}
-								i++;
-							}
-							System.out.println(partida.getJugadores());
 
-							for (Jugador jugador : partidas.get(indice).getJugadores()) {
-								System.out.println("ey");
-								if (!partida.estaJugador(jugador)) {
-									partida.nuevo_jugador(jugador);
-
-									System.out.println("Alguien se unio");
-									System.out.println(partida.getJugadores());
-									
-
-									Canvas canvas = new Canvas();
-									canvas.setName(jugador.getNombre());
-									canvas.setBackground(jugador.getColor());
-									contentPane.add(canvas, 0);
-									canvas.setBounds(582, 567, 30, 28);
-									jugadores_ficha.add(canvas);
-									TableroCliente.this.DibujarFichaAvanza(0, jugador.getNombre());
-
-									System.out.println(jugadores_ficha);
-
-								}
-								
-
-							}
-						} catch (ClassNotFoundException e) {
-							e.printStackTrace();
-						}
-
-					}
-
-				} catch (UnknownHostException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				finally {
-					try {
-						sal.close();
-					} catch (IOException e) {
-						
-						e.printStackTrace();
-					}
-					
-					try {
-						ent.close();
-					} catch (IOException e) {
-						
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		
-		
-
-		nuevosJugadores.start();
-		
-
-	}
-
-	public void cambiarTurnoTablero() {
-
-		DataOutputStream salida =null;
-		try (Socket servidor = new Socket("localhost", 7777)) {
-			
-			salida = new DataOutputStream(servidor.getOutputStream());
-			salida.writeBytes("cambiar turno"+"\r\n");
-			salida.writeBytes(partida.getId()+"+++\r\n");
-
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
+	
 
 }

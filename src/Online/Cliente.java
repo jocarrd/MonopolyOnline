@@ -43,17 +43,19 @@ public class Cliente {
 
 				}
 				Partida jugar = seleccion.getPartida();
-				jugar.getJugadores().add(0, jugador); // Prueba para que me deje lanzar dados
-
-				// inicio proceso unirse a partida
+				
+				
+				
 				salida.writeBytes("unir a partida" + "\r\n");
 				salida.writeBytes(jugar.getId() + "\r\n");
 				salida.flush();
+				
+				
 				ObjectOutputStream envioclases = new ObjectOutputStream(salida);
 				envioclases.writeObject(jugador);
 				envioclases.flush();
 
-				TableroCliente interfaz = new TableroCliente(jugar, jugador);
+				TableroCliente interfaz = new TableroCliente(jugar, jugador,servidor);
 
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();

@@ -17,28 +17,24 @@ import Monopoly.Partida;
 
 public class Servidor {
 
-	private static List<Partida> partidas = new ArrayList<>();
+	private static List<SalaOnline> partidas = new ArrayList<>();
 
 	public static void main(String[] args) {
 
 		try (ServerSocket c = new ServerSocket(7777)) {
 			System.out.println("Servidor en marcha");
 			ExecutorService sesiones = Executors.newCachedThreadPool();
-			// NO METAS MAS DE 5 PARTIDAS sino F
+			
 
-			Partida v1 = new Partida("Partida 1");
-
-			v1.nuevo_jugador(new Jugador("joselito", Color.BLUE));
-			Partida v2 = new Partida("Partida 2");
-			Partida v3 = new Partida("Partida 3");
-			Partida v4 = new Partida("Partida 4");
-			Partida v5 = new Partida("Partida 5");
+			SalaOnline v1 = new SalaOnline( new Partida("Partida 1"));
+			SalaOnline v2 = new SalaOnline( new Partida("Partida 2"));
+			SalaOnline v3 = new SalaOnline( new Partida("Partida 3"));
+		
 
 			partidas.add(v1);
 			partidas.add(v2);
 			partidas.add(v3);
-			partidas.add(v4);
-			partidas.add(v5);
+			
 
 			while (true) {
 
@@ -48,15 +44,21 @@ public class Servidor {
 					System.out.println("Nuevo cliente");
 					DataInputStream ent = new DataInputStream(cliente.getInputStream());
 
-					if (ent.readLine().equals("inicio")) {
+					String evaluar = ent.readLine();
+					
+					
+					
+					if (evaluar.equals("inicio")) {
 						ObjectOutputStream s = new ObjectOutputStream(cliente.getOutputStream());
-						s.writeObject(partidas);
+						s.writeObject(Servidor.getPartidas());
 						s.flush();
+						System.out.println("Hola");
+						evaluar = ent.readLine();
 					}
 
-					if (ent.readLine().equals("unir a partida")) {
+					if (evaluar.equals("unir a partida")) {
 						String id_partida = ent.readLine();
-
+						System.out.println("añade");
 						ObjectInputStream s = new ObjectInputStream(cliente.getInputStream());
 						Jugador unir = null;
 						try {
@@ -64,17 +66,12 @@ public class Servidor {
 							Partida encontrada = Servidor.buscaPartida(id_partida);
 							System.out.println(encontrada.getJugadores());
 							if (encontrada.numero_jugadores() >= encontrada.maxJugadores()) {
-								// No se puede unir a la partida --> un messageBox que diga que no se puede unir
+					
 
 							} else {
-								List<Jugador> jugadores = encontrada.getJugadores();
-								jugadores.add(unir); // Añadimos el jugador al principio
-								
-								//unir.setTurno(jugadores.size());  // o jugadores.size()-1 dependiendo de queremos que empiece en 0 o 1
-									
-								encontrada.setJugadores(jugadores);
 
-								// Jugador en la partida
+								Servidor.buscaSalaPartida(id_partida).anadirJugador(cliente, unir);
+								Servidor.buscaSalaPartida(id_partida).start();
 								System.out.println("añade");
 								System.out.println(encontrada.getJugadores());
 							}
@@ -85,16 +82,8 @@ public class Servidor {
 
 					}
 
-					// Null pointer exception en el servidor ... buscar solucion...
-					if (ent.readLine().equals("cambiar turno")) {
-
-						String id_partida = ent.readLine();
-						Partida cambiar = Servidor.buscaPartida(id_partida);
-						cambiar.pasarTurno();
-
-						System.out.println("He cambiado de turno");
-
-					}
+					
+				
 
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -109,14 +98,36 @@ public class Servidor {
 
 	public static Partida buscaPartida(String id) {
 
-		for (Partida p : Servidor.partidas) {
-			if (p.getId().equals(id)) {
+		for (SalaOnline p : Servidor.partidas) {
+			if (p.getPartida().getId().equals(id)) {
+				return p.getPartida();
+			}
+
+		}
+
+		return null;
+	}
+	
+	public static SalaOnline buscaSalaPartida(String id) {
+
+		for (SalaOnline p : Servidor.partidas) {
+			if (p.getPartida().getId().equals(id)) {
 				return p;
 			}
 
 		}
 
 		return null;
+	}
+	
+	
+	public static List<Partida> getPartidas(){
+		List<Partida> partidas = new ArrayList<>();
+		
+		for(SalaOnline p : Servidor.partidas) {
+			partidas.add(p.getPartida());
+		}
+		return partidas;
 	}
 
 }
