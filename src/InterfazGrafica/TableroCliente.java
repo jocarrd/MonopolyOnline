@@ -25,6 +25,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.awt.event.ActionEvent;
@@ -44,6 +45,8 @@ public class TableroCliente extends JFrame {
 	private List<Canvas> jugadores_ficha = new ArrayList<>();
 	private int click_dados;
 	private int click_comprar;
+	
+	
 
 	public TableroCliente(Partida c, Jugador j,Socket conexion) {
 		this.conexion=conexion;
@@ -127,6 +130,8 @@ public class TableroCliente extends JFrame {
 				}
 			}
 		});
+		
+		
 		Comprar.setBounds(1080, 83, 89, 23);
 		contentPane.add(Comprar);
 
@@ -140,6 +145,15 @@ public class TableroCliente extends JFrame {
 					System.out.println(partida.getTurno());
 					informacion.setText(jugador.getNombre() + " ,has pasado de turno");
 					click_dados--;
+					
+					try {
+						DataOutputStream str = new DataOutputStream(TableroCliente.this.conexion.getOutputStream());
+						str.writeBytes("pasoturno" +"\r\n");
+						
+					} catch (IOException e1) {
+						
+						e1.printStackTrace();
+					}
 					
 					
 
@@ -206,7 +220,7 @@ public class TableroCliente extends JFrame {
 		JLabel label_1 = new JLabel("New label");
 		label_1.setBounds(534, 591, 46, 14);
 		contentPane.add(label_1);
-
+		this.EscuhaPasoTurno();
 		
 		this.setResizable(false);
 
@@ -343,6 +357,49 @@ public class TableroCliente extends JFrame {
 
 			}
 		}
+	}
+	
+	
+	
+	public void EscuhaPasoTurno() {
+		
+		
+		
+		Thread turno = new Thread(new Runnable() {
+
+			
+			public void run() {
+				try {
+					
+					ObjectInputStream s= new ObjectInputStream(TableroCliente.this.conexion.getInputStream());
+					
+					while(true) {
+					System.out.println("Actualizacion");
+					Partida d = (Partida) s.readObject();
+					TableroCliente.this.partida=d;
+					
+					
+					}
+					
+					//ahora habria que redibujar las fichas
+					
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				
+				
+			}
+			
+			
+		});
+		
+		turno.start();
 	}
 
 	

@@ -25,9 +25,11 @@ public class SalaOnline extends Thread {
 			for(Socket d : jugadores) {
 				try {
 					DataInputStream ent = new DataInputStream(d.getInputStream());
-
+					
 					String lectura =ent.readLine();
+					
 					if(lectura.equals("pasoturno")) {
+						System.out.println("Ojo que funciona");
 						ObjectInputStream s = new ObjectInputStream(d.getInputStream());
 						Partida actualizada =(Partida) s.readObject();
 						this.partida=actualizada;

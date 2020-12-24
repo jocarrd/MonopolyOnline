@@ -21,7 +21,8 @@ public class Servidor {
 
 	public static void main(String[] args) {
 
-		try (ServerSocket c = new ServerSocket(7777)) {
+		try  {
+			ServerSocket c = new ServerSocket(7777);
 			System.out.println("Servidor en marcha");
 			ExecutorService sesiones = Executors.newCachedThreadPool();
 			
@@ -70,10 +71,12 @@ public class Servidor {
 
 							} else {
 
+								
 								Servidor.buscaSalaPartida(id_partida).anadirJugador(cliente, unir);
-								Servidor.buscaSalaPartida(id_partida).start();
 								System.out.println("añade");
 								System.out.println(encontrada.getJugadores());
+								Servidor.buscaSalaPartida(id_partida).start();
+								
 							}
 						} catch (ClassNotFoundException e) {
 

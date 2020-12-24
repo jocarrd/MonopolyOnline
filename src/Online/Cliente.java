@@ -21,7 +21,8 @@ public class Cliente {
 		DataOutputStream salida = null;
 		ObjectInputStream s = null;
 
-		try (Socket servidor = new Socket("localhost", 7777);) {
+		try  {
+			Socket servidor = new Socket("localhost", 7777);
 			salida = new DataOutputStream(servidor.getOutputStream());
 
 			salida.writeBytes("inicio" + "\r\n");
@@ -67,21 +68,7 @@ public class Cliente {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (salida != null)
-				try {
-					salida.close();
-				} catch (IOException e1) {
-
-					e1.printStackTrace();
-				}
-
-			if (s != null)
-				try {
-					s.close();
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				}
+			
 		}
 
 	}
