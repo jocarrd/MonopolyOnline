@@ -94,7 +94,7 @@ public class Partida implements Serializable {
 	}
 
 	public void pasarTurno() {
-		if (this.turno == this.jugadores.size() - 1) {
+		if (this.turno == this.jugadores.size() ) {
 			this.turno = 0;
 		} else {
 			this.turno++;

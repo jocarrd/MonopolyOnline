@@ -139,7 +139,7 @@ public class TableroCliente extends JFrame {
 		pasarTurno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List<Jugador> c = partida.getJugadores();
-
+					System.out.println("index"+c.indexOf(jugador));
 				if (partida.getTurno() == c.indexOf(jugador)) {
 					partida.pasarTurno();
 					System.out.println(partida.getTurno());
@@ -225,6 +225,7 @@ public class TableroCliente extends JFrame {
 		label_1.setBounds(534, 591, 46, 14);
 		contentPane.add(label_1);
 		this.EscuhaPasoTurno();
+		
 		
 		this.setResizable(false);
 
@@ -387,7 +388,9 @@ public class TableroCliente extends JFrame {
 					
 					Partida d = (Partida) s.readObject();
 					System.out.println("Actualizacion");
+					System.out.println(d.getTurno());
 					TableroCliente.this.partida=d;
+					TableroCliente.this.refreshFichas();
 					
 					
 					}
@@ -412,6 +415,9 @@ public class TableroCliente extends JFrame {
 		
 		turno.start();
 	}
+	
+	
+	
 
 	
 							
