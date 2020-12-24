@@ -231,6 +231,13 @@ public class TableroCliente extends JFrame {
 		this.setVisible(true);
 
 	}
+	
+	public void refreshFichas() {	
+		for(Jugador j : this.partida.getJugadores()) {
+			DibujarFichaAvanza(j.getPosicion_tablero(), j.getNombre());
+		}
+	}
+	
 
 	public void DibujarFichaAvanza(int posicion, String nombre) {
 

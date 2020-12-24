@@ -13,6 +13,8 @@ import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import java.awt.SystemColor;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
 
 public class MostrarPropiedades extends JFrame {
 
@@ -36,14 +38,20 @@ public class MostrarPropiedades extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setBackground(SystemColor.control);
-		textPane.setEditable(false);
-		textPane.setBounds(66, 87, 498, 248);
+		textPane.setBounds(10, 11, 650, 369);
+		contentPane.add(textPane);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(595, 34, 23, 48);
+		contentPane.add(scrollPane);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(663, 55, 2, 2);
+		contentPane.add(scrollPane_1);
 		
 		for(Calle  c: propiedades) {
 			textPane.setText(textPane.getText()+"\r\n"+ c.getNombre()+" "+ Math.round(c.getAlquiler())+"$");
 		}
-		contentPane.add(textPane);
 		
 		 setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		 this.setResizable(false);
