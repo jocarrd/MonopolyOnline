@@ -43,6 +43,7 @@ public class Cliente {
 
 				}
 				Partida jugar = seleccion.getPartida();
+				jugar.nuevo_jugador(jugador);
 				
 				
 				
@@ -56,6 +57,8 @@ public class Cliente {
 				envioclases.flush();
 
 				TableroCliente interfaz = new TableroCliente(jugar, jugador,servidor);
+				
+				
 
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
