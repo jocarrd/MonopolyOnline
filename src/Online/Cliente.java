@@ -58,8 +58,8 @@ public class Cliente {
 				envioclases.flush();
 
 				TableroCliente interfaz = new TableroCliente(jugar, jugador,servidor);
-				interfaz.refreshFichas();
-			
+				
+				
 
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
