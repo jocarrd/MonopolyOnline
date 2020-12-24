@@ -29,8 +29,8 @@ public class SalaOnline extends Thread {
 					String lectura =ent.readLine();
 					
 					if(lectura.equals("pasoturno")) {
-						
-						ObjectInputStream s = new ObjectInputStream(ent);
+						System.out.println("Estoy aqui");
+						ObjectInputStream s = new ObjectInputStream(d.getInputStream());
 						Partida actualizada =(Partida) s.readObject();
 						this.partida=actualizada;
 						this.Broadcast();

@@ -150,6 +150,10 @@ public class TableroCliente extends JFrame {
 						DataOutputStream str = new DataOutputStream(TableroCliente.this.conexion.getOutputStream());
 						str.writeBytes("pasoturno" +"\r\n");
 						
+						ObjectOutputStream s = new ObjectOutputStream(str);
+						s.writeObject(TableroCliente.this.partida);
+						
+						
 					} catch (IOException e1) {
 						
 						e1.printStackTrace();
@@ -374,8 +378,9 @@ public class TableroCliente extends JFrame {
 					ObjectInputStream s= new ObjectInputStream(TableroCliente.this.conexion.getInputStream());
 					
 					while(true) {
-					System.out.println("Actualizacion");
+					
 					Partida d = (Partida) s.readObject();
+					System.out.println("Actualizacion");
 					TableroCliente.this.partida=d;
 					
 					
