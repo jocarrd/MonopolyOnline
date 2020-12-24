@@ -33,6 +33,7 @@ public class Cliente {
 			try {
 				List<Partida> partidas = (List<Partida>) s.readObject();
 				registro = new RegistrarJugador();
+			
 
 				while (registro.isShowing()) {
 
