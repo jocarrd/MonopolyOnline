@@ -55,13 +55,13 @@ public class Servidor {
 						ObjectOutputStream s = new ObjectOutputStream(cliente.getOutputStream());
 						s.writeObject(Servidor.getPartidas());
 						s.flush();
-						System.out.println("Hola");
+						
 						evaluar = ent.readLine();
 					}
 
 					if (evaluar.equals("unir a partida")) {
 						String id_partida = ent.readLine();
-						System.out.println("añade");
+						
 						ObjectInputStream s = new ObjectInputStream(cliente.getInputStream());
 						Jugador unir = null;
 						try {
@@ -75,7 +75,7 @@ public class Servidor {
 
 								
 								Servidor.buscaSalaPartida(id_partida).anadirJugador(cliente, unir);
-								System.out.println("añade");
+								
 								System.out.println(encontrada.getJugadores());
 								
 								
