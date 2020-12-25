@@ -27,7 +27,7 @@ public class Partida implements Serializable {
 		this.id_partida = id;
 		this.turno = 0;
 		this.tablero = new Tablero();
-		this.jugadores = new ArrayList<>();
+		this.jugadores = new ArrayList<>(); 
  
 	} 
 	
@@ -94,7 +94,7 @@ public class Partida implements Serializable {
 	}
 
 	public void pasarTurno() {
-		if (this.turno == this.jugadores.size() ) {
+		if (this.turno == this.jugadores.size()-1 ) {
 			this.turno = 0;
 		} else {
 			this.turno++;

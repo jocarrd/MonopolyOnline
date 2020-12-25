@@ -139,7 +139,9 @@ public class TableroCliente extends JFrame {
 		pasarTurno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List<Jugador> c = partida.getJugadores();
-					System.out.println("index"+c.indexOf(jugador));
+				System.out.println("Turno de la partida" +partida.getTurno());	
+				System.out.println(c);
+				System.out.println("index"+c.indexOf(jugador));
 				if (partida.getTurno() == c.indexOf(jugador)) {
 					partida.pasarTurno();
 					System.out.println(partida.getTurno());
@@ -388,12 +390,19 @@ public class TableroCliente extends JFrame {
 					
 					Partida d = (Partida) s.readObject();
 					
+					for( Jugador c :d.getJugadores()) {
+						if(c.getNombre().equals(TableroCliente.this.jugador.getNombre()))
+						{
+							TableroCliente.this.jugador=c;
+						}
+					}
+					
 					
 					//comprobar si se han añadido nuevos jugadores y añadir al canvas
 					
 					
 					
-					TableroCliente.this.partida=d;
+					TableroCliente.this.partida=d; 
 					System.out.println("Actualizacion" + partida.numero_jugadores() );
 					System.out.println(d.getTurno());
 					System.out.println(TableroCliente.this.jugadores_ficha);

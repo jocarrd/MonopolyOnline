@@ -32,8 +32,8 @@ public class Servidor {
 			SalaOnline v3 = new SalaOnline( new Partida("Partida 3"));
 		
 			v1.start();
-			v2.start();
-			v3.start();
+			//v2.start();
+			//v3.start();
 			partidas.add(v1);
 			partidas.add(v2);
 			partidas.add(v3);
@@ -75,8 +75,8 @@ public class Servidor {
 
 								
 								Servidor.buscaSalaPartida(id_partida).anadirJugador(cliente, unir);
-								
-								System.out.println(encontrada.getJugadores());
+								System.out.println("Nuevo jugador");
+								System.out.println(Servidor.buscaSalaPartida(id_partida).getJugadores());
 								
 								
 							}

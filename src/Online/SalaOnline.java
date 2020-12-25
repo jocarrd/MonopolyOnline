@@ -20,38 +20,10 @@ public class SalaOnline extends Thread {
 	public void run() {
 
 		this.alguienseUnio();
-		while (true) {
-			for (Socket d : jugadores) {
-				try {
-					DataInputStream ent = new DataInputStream(d.getInputStream());
-
-					String lectura = ent.readLine();
-
-					if (lectura.equals("pasoturno")) {
-						System.out.println("Estoy aqui");
-						ObjectInputStream s = new ObjectInputStream(d.getInputStream());
-						Partida actualizada = (Partida) s.readObject();
-						this.partida = actualizada;
-						this.Broadcast();
-						System.out.println("El servidor notifica cambio de turno");
-
-						break;
-					}
-
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				} catch (NullPointerException e) {
-
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
+		
 		}
 
-	}
+	
 
 	public SalaOnline(Partida p) {
 		this.partida = p;
@@ -64,16 +36,28 @@ public class SalaOnline extends Thread {
 
 			@Override
 			public void run() {
+				
 				int c = SalaOnline.this.jugadores.size();
 				while (true) {
-
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							
+							e.printStackTrace();
+						}
+					System.out.println("Antes"+ c);
+					System.out.println("Despues"+SalaOnline.this.jugadores.size());
 					if (SalaOnline.this.jugadores.size() != c) {
+						
+						Sesion ss = new Sesion(jugadores.get(jugadores.size()-1), jugadores );
+						ss.start();
+						System.out.println("El jugador : " + SalaOnline.this.partida.getJugadores().get(SalaOnline.this.partida.getJugadores().size()-1).getNombre()+ " Se unio");
 
-						SalaOnline.this.Broadcast();
-
-					}
+					} 
 
 					c = SalaOnline.this.jugadores.size();
+					
+					
 
 				}
 
@@ -83,7 +67,11 @@ public class SalaOnline extends Thread {
 
 		hilo.start();
 	}
-
+	
+	public void anadirJugador(Socket c,Jugador w) {
+		this.jugadores.add(c);
+		this.partida.nuevo_jugador(w);
+	}
 	public Partida getPartida() {
 		return partida;
 	}
@@ -94,15 +82,6 @@ public class SalaOnline extends Thread {
 
 	public List<Socket> getJugadores() {
 		return jugadores;
-	}
-
-	public void setJugadores(ArrayList<Socket> jugadores) {
-		this.jugadores = jugadores;
-	}
-
-	public void anadirJugador(Socket d, Jugador c) {
-		this.jugadores.add(d);
-		this.partida.nuevo_jugador(c);
 	}
 
 	public void Broadcast() {
