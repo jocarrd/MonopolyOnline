@@ -387,10 +387,19 @@ public class TableroCliente extends JFrame {
 					while(true) {
 					
 					Partida d = (Partida) s.readObject();
-					System.out.println("Actualizacion");
-					System.out.println(d.getTurno());
+					
+					
+					//comprobar si se han añadido nuevos jugadores y añadir al canvas
+					
+					
+					
 					TableroCliente.this.partida=d;
+					System.out.println("Actualizacion" + partida.numero_jugadores() );
+					System.out.println(d.getTurno());
+					System.out.println(TableroCliente.this.jugadores_ficha);
 					TableroCliente.this.refreshFichas();
+					
+					
 					
 					
 					}
