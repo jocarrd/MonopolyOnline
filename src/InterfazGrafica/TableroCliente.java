@@ -45,11 +45,15 @@ public class TableroCliente extends JFrame {
 	private List<Canvas> jugadores_ficha = new ArrayList<>();
 	private int click_dados;
 	private int click_comprar;
-	
+	private ObjectInputStream ObjectIn;
+	private ObjectOutputStream ObjectOut;
 	
 
 	public TableroCliente(Partida c, Jugador j,Socket conexion) {
 		this.conexion=conexion;
+		
+		System.out.println(j);
+		
 		setTitle("Partida");
 		this.partida = c;
 		this.jugador = j;
@@ -404,7 +408,7 @@ public class TableroCliente extends JFrame {
 					
 					TableroCliente.this.partida=d; 
 					System.out.println("Actualizacion" + partida.numero_jugadores() );
-					System.out.println(d.getTurno());
+					
 					System.out.println(TableroCliente.this.jugadores_ficha);
 					TableroCliente.this.refreshFichas();
 					
@@ -413,7 +417,7 @@ public class TableroCliente extends JFrame {
 					
 					}
 					
-					//ahora habria que redibujar las fichas
+					
 					
 				} catch (IOException e) {
 					
