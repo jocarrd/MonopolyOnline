@@ -70,13 +70,14 @@ public class Sesion extends Thread {
 	
 	
 	public void Broadcast() {
+		ObjectOutputStream s;
 		for (Socket d : this.players) {
 
-			ObjectOutputStream s;
+			
 			try {
 				s = new ObjectOutputStream(d.getOutputStream());
 				s.writeObject(partida);
-			} catch (IOException e1) {
+			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 

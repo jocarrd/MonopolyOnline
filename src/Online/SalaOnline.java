@@ -84,18 +84,6 @@ public class SalaOnline extends Thread {
 		return jugadores;
 	}
 
-	public void Broadcast() {
-		for (Socket d : this.jugadores) {
-
-			ObjectOutputStream s;
-			try {
-				s = new ObjectOutputStream(d.getOutputStream());
-				s.writeObject(partida);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-
-		}
-	}
+	
 
 }
