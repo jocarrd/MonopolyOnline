@@ -34,7 +34,7 @@ public class Sesion extends Thread {
 					this.Broadcast();
 					System.out.println("El servidor notifica cambio de turno");
 				}
-				
+				 
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -57,9 +57,11 @@ public class Sesion extends Thread {
 	
 	
 	
-	public Sesion(Socket cliente , ArrayList<Socket> players ) {
+	public Sesion(Socket cliente , ArrayList<Socket> players ,Partida d) {
 		this.cliente=cliente;
 		this.players=players;
+		this.partida=d;
+		this.Broadcast();
 	}
 	
 	

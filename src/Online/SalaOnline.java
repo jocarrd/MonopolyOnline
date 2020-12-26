@@ -49,7 +49,7 @@ public class SalaOnline extends Thread {
 					System.out.println("Despues"+SalaOnline.this.jugadores.size());
 					if (SalaOnline.this.jugadores.size() != c) {
 						
-						Sesion ss = new Sesion(jugadores.get(jugadores.size()-1), jugadores );
+						Sesion ss = new Sesion(jugadores.get(jugadores.size()-1), jugadores ,SalaOnline.this.partida);
 						ss.start();
 						System.out.println("El jugador : " + SalaOnline.this.partida.getJugadores().get(SalaOnline.this.partida.getJugadores().size()-1).getNombre()+ " Se unio");
 

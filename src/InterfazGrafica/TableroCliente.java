@@ -393,7 +393,7 @@ public class TableroCliente extends JFrame {
 					while(true) {
 					
 					Partida d = (Partida) s.readObject();
-					
+					System.out.println(d);
 					for( Jugador c :d.getJugadores()) {
 						if(c.getNombre().equals(TableroCliente.this.jugador.getNombre()))
 						{
