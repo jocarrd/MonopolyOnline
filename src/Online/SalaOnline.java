@@ -14,14 +14,44 @@ import Monopoly.Partida;
 
 public class SalaOnline extends Thread {
 	private Partida partida;
-
+	private static int turno=0;
 	private ArrayList<Socket> jugadores;
+	
 
 	public void run() {
-
-		this.alguienseUnio();
 		
+		while (true) {
+			for(Socket d : jugadores) {
+				try {
+					DataInputStream ent = new DataInputStream(d.getInputStream());
+					
+					String lectura =ent.readLine();
+					
+					if(lectura.equals("pasoturno")) {
+						System.out.println("Estoy aqui");
+						ObjectInputStream s = new ObjectInputStream(d.getInputStream());
+						Partida actualizada =(Partida) s.readObject();
+						this.partida=actualizada;
+						this.Broadcast();
+						System.out.println("El servidor notifica cambio de turno");
+						
+						break;
+					}
+					
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}catch(NullPointerException e) {
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 		}
+
+	}
 
 	
 
@@ -31,42 +61,7 @@ public class SalaOnline extends Thread {
 
 	}
 
-	public void alguienseUnio() {
-		Thread hilo = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				
-				int c = SalaOnline.this.jugadores.size();
-				while (true) {
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							
-							e.printStackTrace();
-						}
-					System.out.println("Antes"+ c);
-					System.out.println("Despues"+SalaOnline.this.jugadores.size());
-					if (SalaOnline.this.jugadores.size() != c) {
-						
-						Sesion ss = new Sesion(jugadores.get(jugadores.size()-1), jugadores ,SalaOnline.this.partida);
-						ss.start();
-						System.out.println("El jugador : " + SalaOnline.this.partida.getJugadores().get(SalaOnline.this.partida.getJugadores().size()-1).getNombre()+ " Se unio");
-
-					} 
-
-					c = SalaOnline.this.jugadores.size();
-					
-					
-
-				}
-
-			}
-
-		});
-
-		hilo.start();
-	}
+	
 	
 	public void anadirJugador(Socket c,Jugador w) {
 		this.jugadores.add(c);
@@ -84,6 +79,20 @@ public class SalaOnline extends Thread {
 		return jugadores;
 	}
 
+	public void Broadcast() {
+		ObjectOutputStream s;
+		for (Socket d : this.jugadores) {
+
+			
+			try {
+				s = new ObjectOutputStream(d.getOutputStream());
+				s.writeObject(partida);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+
+		}
+	}
 	
 
 }

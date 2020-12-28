@@ -35,7 +35,7 @@ import java.awt.SystemColor;
 import java.awt.Font;
 
 public class TableroCliente extends JFrame {
-
+	private boolean esTurno;
 	private JPanel contentPane;
 	private Partida partida;
 	private Image v;
