@@ -117,6 +117,8 @@ public class TableroCliente extends JFrame {
 						Calle d = (Calle) partida.getTablero().getCasilla(jugador.getPosicion_tablero());
 						if (!d.TienePropietario()) {
 							jugador.anadir_propiedad(d);
+							//jugador.getMostProp().anyadirPropiedades(partida, jugador, d.getNombre(), d.getPrecio_compra());
+							mp.anyadirPropiedades(partida, jugador, d.getNombre(), d.getPrecio_compra());
 							jugador.sacar_dinero(d.getPrecio_compra());
 							d.setPropietario(jugador);
 							informacion.setText("Compra realizada");
@@ -178,7 +180,7 @@ public class TableroCliente extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				List<Calle> propiedades = jugador.getPropiedades();
-				MostrarPropiedades mostrarPropiedades = new MostrarPropiedades(propiedades);
+				MostrarPropiedades mostrarPropiedades = new MostrarPropiedades(propiedades, jugador, partida);
 
 			}
 		});
@@ -402,7 +404,7 @@ public class TableroCliente extends JFrame {
 					}
 					
 					
-					//comprobar si se han añadido nuevos jugadores y añadir al canvas
+					//comprobar si se han aÃ±adido nuevos jugadores y aÃ±adir al canvas
 					
 					
 					
