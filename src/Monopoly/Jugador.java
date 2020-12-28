@@ -7,12 +7,17 @@ import java.util.List;
 
 public class Jugador implements Serializable {
 	private String nombre;
+//	MostrarPropiedades mostProp;
 	private List<Calle> propiedades;
 	private double dinero;
 	private int posicion_tablero;
 	private Color c;
 //	private int turno;
 
+	
+	//	public MostrarPropiedades getMostProp() {		aqui podemos ver una alternativa para mostrar las porpiedades
+//		return mostProp;
+//	}
 	public Jugador(String nom, Color c) {
 		// Se pone en la casilla de salida al jugador
 
