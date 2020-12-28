@@ -45,6 +45,7 @@ public class TableroCliente extends JFrame {
 	private List<Canvas> jugadores_ficha = new ArrayList<>();
 	private int click_dados;
 	private int click_comprar;
+	private MostrarPropiedades mp;
 	private ObjectInputStream ObjectIn;
 	private ObjectOutputStream ObjectOut;
 	
