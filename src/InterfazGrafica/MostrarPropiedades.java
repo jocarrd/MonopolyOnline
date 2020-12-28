@@ -8,7 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Monopoly.Calle;
+import Monopoly.*;
+
 import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
@@ -17,18 +18,17 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
 public class MostrarPropiedades extends JFrame {
+	
+	Partida p;
+	Jugador j;
+	String s = "";
 
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-	
-
-	/**
 	 * Create the frame.
 	 */
-	public MostrarPropiedades(List<Calle> propiedades) {
+	public MostrarPropiedades(List<Calle> propiedades, Jugador j, Partida p) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 681, 420);
 		this.setTitle("Propiedades");
@@ -38,24 +38,32 @@ public class MostrarPropiedades extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setBounds(10, 11, 650, 369);
+		textPane.setEditable(false);
+		textPane.setBounds(10, 11, 644, 369);
+		textPane.setText(s);
 		contentPane.add(textPane);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(595, 34, 23, 48);
+		scrollPane.setBounds(652, 11, 23, 369);
 		contentPane.add(scrollPane);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(663, 55, 2, 2);
-		contentPane.add(scrollPane_1);
-		
-		for(Calle  c: propiedades) {
-			textPane.setText(textPane.getText()+"\r\n"+ c.getNombre()+" "+ Math.round(c.getAlquiler())+"$");
-		}
+//		for(Calle  c: propiedades) {
+//			textPane.setText(textPane.getText()+"\r\n"+ c.getNombre()+" "+ Math.round(c.getAlquiler())+"$");
+//		}
 		
 		 setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		 this.setResizable(false);
 		this.setVisible(true);
 	
 	}
+	
+	
+	public void anyadirPropiedades(Partida p, Jugador j, String nombrePropiedad, double d) {
+		this.j = j;
+		this.p = p;
+		this.s = s + nombrePropiedad + d + "\r\n";
+	}
+	
+	
+	
 }
