@@ -39,17 +39,17 @@ public class MostrarPropiedades extends JFrame {
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setEditable(false);
-		textPane.setBounds(10, 11, 644, 369);
+		textPane.setBounds(0, 0, 654, 391);
 		textPane.setText(s);
 		contentPane.add(textPane);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(652, 11, 23, 369);
+		scrollPane.setBounds(652, 0, 23, 391);
 		contentPane.add(scrollPane);
 		
-//		for(Calle  c: propiedades) {
-//			textPane.setText(textPane.getText()+"\r\n"+ c.getNombre()+" "+ Math.round(c.getAlquiler())+"$");
-//		}
+		for(Calle  c: propiedades) {
+			textPane.setText(textPane.getText()+"\r\n"+ c.getNombre()+" "+ Math.round(c.getAlquiler())+"$");
+		}
 		
 		 setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		 this.setResizable(false);
@@ -58,10 +58,8 @@ public class MostrarPropiedades extends JFrame {
 	}
 	
 	
-	public void anyadirPropiedades(Partida p, Jugador j, String nombrePropiedad, double d) {
-		this.j = j;
-		this.p = p;
-		this.s = s + nombrePropiedad + d + "\r\n";
+	public void anyadirPropiedades(String nombrePropiedad, double d) {
+		this.s = s + nombrePropiedad + " " + d + "\r\n";
 	}
 	
 	

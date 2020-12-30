@@ -14,8 +14,8 @@ public class Tablero implements Serializable {
 	static final int tam = 39;
 
 	private Casilla[] casillas = new Casilla[40];
-	private ArrayList<String> baraja_comunidad = new ArrayList<String>();
-	private ArrayList<String> baraja_sorpresa = new ArrayList<String>();
+	private Map<String,Integer> baraja_comunidad = new HashMap<>();
+	private Map<String ,Integer> baraja_sorpresa = new HashMap<>();
 
 	
 	
@@ -69,14 +69,35 @@ public class Tablero implements Serializable {
 		colores_calles.add(Color.ORANGE);nombres_calles.add("MacFit");
 		
 		
+		baraja_comunidad.put("Hacienda te quita ", 500);
+		baraja_comunidad.put("Hacienda te quita ", 300);
+		baraja_comunidad.put("Hacienda te quita ", 550);
+		baraja_comunidad.put("Hacienda te quita ", 400);
+		baraja_comunidad.put("Hacienda te quita ", 200);
+		baraja_comunidad.put("Hacienda te quita ", 100);
+		baraja_comunidad.put("Hacienda te quita ", 150);
+		baraja_comunidad.put("Hacienda te quita ", 220);
+		baraja_comunidad.put("Hacienda te quita ", 440);
+		baraja_comunidad.put("Hacienda te quita ", 50);
 		
 		
+		
+		baraja_sorpresa.put("Se te ha concedido ", 200);
+		baraja_sorpresa.put("Se te ha concedido ", 100);
+		baraja_sorpresa.put("Se te ha concedido ", 340);
+		baraja_sorpresa.put("Se te ha concedido ", 200);
+		baraja_sorpresa.put("Se te ha concedido ", 200);
+		baraja_sorpresa.put("Se te ha concedido ", 200);
+		baraja_sorpresa.put("Se te ha concedido ", 200);
+		baraja_sorpresa.put("Se te ha concedido ", 200);
+		baraja_sorpresa.put("Se te ha concedido ", 200);
+		baraja_sorpresa.put("Se te ha concedido ", 200);
 		
 		
 		
 
 		int cont = 0;
-
+		
 		for (int i = 0; i <= Tablero.tam; i++) {
 			if (i == 0) {
 				Casilla c = new Casilla(i, "Salida", TipoCasilla.salida);  

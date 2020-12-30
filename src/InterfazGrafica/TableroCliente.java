@@ -13,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 import Monopoly.Calle;
 import Monopoly.Jugador;
 import Monopoly.Partida;
+import Monopoly.TipoCasilla;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Canvas;
@@ -118,10 +120,11 @@ public class TableroCliente extends JFrame {
 						Calle d = (Calle) partida.getTablero().getCasilla(jugador.getPosicion_tablero());
 						if (!d.TienePropietario()) {
 							jugador.anadir_propiedad(d);
-							//jugador.getMostProp().anyadirPropiedades(partida, jugador, d.getNombre(), d.getPrecio_compra());
-							mp.anyadirPropiedades(partida, jugador, d.getNombre(), d.getPrecio_compra());
+							
+							//mp.anyadirPropiedades(d.getNombre(), d.getPrecio_compra());
 							jugador.sacar_dinero(d.getPrecio_compra());
 							d.setPropietario(jugador);
+							//jugador.getMostProp().anyadirPropiedades(d.getNombre(), d.getPrecio_compra());
 							informacion.setText("Compra realizada");
 							dinero.setText(String.valueOf((Math.round(jugador.getDinero()))));
 							click_comprar++;
@@ -220,6 +223,12 @@ public class TableroCliente extends JFrame {
 																							// del jugador en la
 																							// interfaz
 					click_dados++;
+					if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.comunidad)) {
+						
+					}
+					else if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.sorpresa)) {
+						
+					}
 				}
 
 			}

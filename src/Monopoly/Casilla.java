@@ -23,6 +23,8 @@ public class Casilla implements Serializable {
 		this.nombre = nombre;
 		this.tipoCasilla = t;
 		
+		
+		
 	}
 	
 	 
