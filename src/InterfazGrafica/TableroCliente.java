@@ -11,8 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Monopoly.Calle;
+import Monopoly.Comunidad;
 import Monopoly.Jugador;
 import Monopoly.Partida;
+import Monopoly.Sorpresa;
 import Monopoly.TipoCasilla;
 
 import javax.swing.JLabel;
@@ -223,11 +225,15 @@ public class TableroCliente extends JFrame {
 																							// del jugador en la
 																							// interfaz
 					click_dados++;
-					if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.comunidad)) {
-						
+					
+					if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.comunidad)) {	
+						Comunidad com = (Comunidad) TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero());
+						//MostrarCartaBaraja mcb = new MostrarCartaBaraja();
 					}
-					else if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.sorpresa)) {
-						
+					
+					if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.sorpresa)) {
+						Sorpresa sor = (Sorpresa) TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero());
+						//MostrarCartaBaraja mcb = new MostrarCartaBaraja();
 					}
 				}
 
