@@ -16,6 +16,7 @@ import Monopoly.Comunidad;
 import Monopoly.Jugador;
 import Monopoly.Partida;
 import Monopoly.Sorpresa;
+import Monopoly.Tablero;
 import Monopoly.TipoCasilla;
 
 import javax.swing.JLabel;
@@ -229,12 +230,18 @@ public class TableroCliente extends JFrame {
 					
 					if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.comunidad)) {	
 						Comunidad com = (Comunidad) TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero());
-						MostrarCartaBaraja mcbc = new MostrarCartaBaraja(com.getNombre(), getRandomElement(com.getListaCantidades()));
+						int cantRand = getRandomElement(Tablero.getBarajaComunidad());
+						double dineroJugador = jugador.getDinero() + cantRand;
+						MostrarCartaBaraja mcbc = new MostrarCartaBaraja(com.getNombre(), cantRand);
+						jugador.setDinero(dineroJugador);
 					}
 					
 					if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.sorpresa)) {
 						Sorpresa sor = (Sorpresa) TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero());
-						MostrarCartaBaraja mcbs = new MostrarCartaBaraja(sor.getNombre(), getRandomElement(sor.getListaCantidades()));
+						int cantRand = getRandomElement(Tablero.getBarajaSorpresa());
+						double dineroJugador = jugador.getDinero() + cantRand;
+						MostrarCartaBaraja mcbs = new MostrarCartaBaraja(sor.getNombre(), cantRand);
+						jugador.setDinero(dineroJugador);
 					}
 										 
 				}
