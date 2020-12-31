@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.List;
 
 public class Comunidad extends Casilla{
-	String s;
+//	String s;
 	List<Integer> l;
 	Color col;
 	
@@ -14,9 +14,9 @@ public class Comunidad extends Casilla{
 		this.l = l;
 	}
 	
-	public String getText(){
-		return this.s;
-	}
+//	public String getText(){
+//		return this.s;
+//	}
 	
 	public List<Integer> getListaCantidades(){
 		return this.l;

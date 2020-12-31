@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -228,13 +229,14 @@ public class TableroCliente extends JFrame {
 					
 					if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.comunidad)) {	
 						Comunidad com = (Comunidad) TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero());
-						//MostrarCartaBaraja mcb = new MostrarCartaBaraja();
+						MostrarCartaBaraja mcbc = new MostrarCartaBaraja(com.getNombre(), getRandomElement(com.getListaCantidades()));
 					}
 					
 					if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.sorpresa)) {
 						Sorpresa sor = (Sorpresa) TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero());
-						//MostrarCartaBaraja mcb = new MostrarCartaBaraja();
+						MostrarCartaBaraja mcbs = new MostrarCartaBaraja(sor.getNombre(), getRandomElement(sor.getListaCantidades()));
 					}
+										 
 				}
 
 			}
@@ -256,6 +258,11 @@ public class TableroCliente extends JFrame {
 		this.setVisible(true);
 
 	}
+	
+	public int getRandomElement(List<Integer> list){ 
+        Random rand = new Random(); 
+        return list.get(rand.nextInt(list.size())); 
+    }
 
 	public void DibujarFichaAvanza(int posicion, String nombre) {
 
