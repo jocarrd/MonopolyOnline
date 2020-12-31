@@ -21,7 +21,6 @@ public class MostrarPropiedades extends JFrame {
 	
 	Partida p;
 	Jugador j;
-	String s = "";
 
 	private JPanel contentPane;
 
@@ -40,7 +39,6 @@ public class MostrarPropiedades extends JFrame {
 		JTextPane textPane = new JTextPane();
 		textPane.setEditable(false);
 		textPane.setBounds(0, 0, 654, 391);
-		textPane.setText(s);
 		contentPane.add(textPane);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -56,12 +54,6 @@ public class MostrarPropiedades extends JFrame {
 		this.setVisible(true);
 	
 	}
-	
-	
-	public void anyadirPropiedades(String nombrePropiedad, double d) {
-		this.s = s + nombrePropiedad + " " + d + "\r\n";
-	}
-	
 	
 	
 }

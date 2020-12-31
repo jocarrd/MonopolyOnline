@@ -14,8 +14,11 @@ public class Tablero implements Serializable {
 	static final int tam = 39;
 
 	private Casilla[] casillas = new Casilla[40];
-	private Map<String,Integer> baraja_comunidad = new HashMap<>();
-	private Map<String ,Integer> baraja_sorpresa = new HashMap<>();
+//	private Map<String,Integer> baraja_comunidad = new HashMap<>();
+//	private Map<String ,Integer> baraja_sorpresa = new HashMap<>();
+	
+	private List<Integer> baraja_comunidad = new ArrayList<>();
+	private List<Integer> baraja_sorpresa = new ArrayList<>();
 
 	
 	
@@ -69,34 +72,57 @@ public class Tablero implements Serializable {
 		colores_calles.add(Color.ORANGE);nombres_calles.add("MacFit");
 		
 		
-		baraja_comunidad.put("Hacienda te quita ", 500);
-		baraja_comunidad.put("Hacienda te quita ", 300);
-		baraja_comunidad.put("Hacienda te quita ", 550);
-		baraja_comunidad.put("Hacienda te quita ", 400);
-		baraja_comunidad.put("Hacienda te quita ", 200);
-		baraja_comunidad.put("Hacienda te quita ", 100);
-		baraja_comunidad.put("Hacienda te quita ", 150);
-		baraja_comunidad.put("Hacienda te quita ", 220);
-		baraja_comunidad.put("Hacienda te quita ", 440);
-		baraja_comunidad.put("Hacienda te quita ", 50);
+//		baraja_comunidad.put("Hacienda te quita ", 500);
+//		baraja_comunidad.put("Hacienda te quita ", 300);
+//		baraja_comunidad.put("Hacienda te quita ", 550);
+//		baraja_comunidad.put("Hacienda te quita ", 400);
+//		baraja_comunidad.put("Hacienda te quita ", 200);
+//		baraja_comunidad.put("Hacienda te quita ", 100);
+//		baraja_comunidad.put("Hacienda te quita ", 150);
+//		baraja_comunidad.put("Hacienda te quita ", 220);
+//		baraja_comunidad.put("Hacienda te quita ", 440);
+//		baraja_comunidad.put("Hacienda te quita ", 50);
+//		
+//			
+//		baraja_sorpresa.put("Se te ha concedido ", 200);
+//		baraja_sorpresa.put("Se te ha concedido ", 100);
+//		baraja_sorpresa.put("Se te ha concedido ", 120);
+//		baraja_sorpresa.put("Se te ha concedido ", 140);
+//		baraja_sorpresa.put("Se te ha concedido ", 20);
+//		baraja_sorpresa.put("Se te ha concedido ", 50);
+//		baraja_sorpresa.put("Se te ha concedido ", 250);
+//		baraja_sorpresa.put("Se te ha concedido ", 300);
+//		baraja_sorpresa.put("Se te ha concedido ", 70);
+//		baraja_sorpresa.put("Se te ha concedido ", 30);
 		
 		
-		
-		baraja_sorpresa.put("Se te ha concedido ", 200);
-		baraja_sorpresa.put("Se te ha concedido ", 100);
-		baraja_sorpresa.put("Se te ha concedido ", 340);
-		baraja_sorpresa.put("Se te ha concedido ", 200);
-		baraja_sorpresa.put("Se te ha concedido ", 200);
-		baraja_sorpresa.put("Se te ha concedido ", 200);
-		baraja_sorpresa.put("Se te ha concedido ", 200);
-		baraja_sorpresa.put("Se te ha concedido ", 200);
-		baraja_sorpresa.put("Se te ha concedido ", 200);
-		baraja_sorpresa.put("Se te ha concedido ", 200);
-		
+		baraja_comunidad.add(500);
+		baraja_comunidad.add(300);
+		baraja_comunidad.add(550);
+		baraja_comunidad.add(400);
+		baraja_comunidad.add(200);
+		baraja_comunidad.add(100);
+		baraja_comunidad.add(150);
+		baraja_comunidad.add(220);
+		baraja_comunidad.add(440);
+		baraja_comunidad.add(50);
 		
 		
+		baraja_sorpresa.add(200);
+		baraja_sorpresa.add(100);
+		baraja_sorpresa.add(120);
+		baraja_sorpresa.add(140);
+		baraja_sorpresa.add(20);
+		baraja_sorpresa.add(50);
+		baraja_sorpresa.add(250);
+		baraja_sorpresa.add(300);
+		baraja_sorpresa.add(70);
+		baraja_sorpresa.add(30);
+				
 
 		int cont = 0;
+		int contBC = 0;
+		int contBS = 0;
 		
 		for (int i = 0; i <= Tablero.tam; i++) {
 			if (i == 0) {
@@ -105,8 +131,10 @@ public class Tablero implements Serializable {
 			} 
 
 			else if ((i  == 2) ||(i ==17) || (i ==33)) {
-				Casilla c = new Casilla(i, "Comunidad", TipoCasilla.comunidad); 
+				//Casilla c = new Casilla(i, "Comunidad", TipoCasilla.comunidad);
+				Casilla c = new Comunidad(i, "Tienes que pagar a la banca ", baraja_comunidad, null);
 				this.casillas[i] = c;
+				contBC++;
 			}
 
 			else if ((i == 10)||(i == 30))  {
@@ -114,8 +142,11 @@ public class Tablero implements Serializable {
 				this.casillas[i] = c;
 
 			} else if ((i == 7) || (i == 22)|| (i == 36)) {
-				Casilla c = new Casilla(i, "Sorpresa", TipoCasilla.sorpresa); 
+				//Casilla c = new Casilla(i, "Sorpresa", TipoCasilla.sorpresa); 
+				Casilla c = new Sorpresa(i, "Se te ha concedido ", baraja_sorpresa, null);
 				this.casillas[i] = c;
+				contBS++;
+				
 			} else if (i == 20) {
 				Casilla c = new Casilla(i, "Parking", TipoCasilla.parking); 
 				this.casillas[i] = c;
