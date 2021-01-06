@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 
@@ -20,7 +21,7 @@ public class SalaOnline extends Thread {
 	private static int turno = 0;
 	private ArrayList<Socket> jugadores;
 
-	private CyclicBarrier barrera = new CyclicBarrier(3);
+	private CountDownLatch barrera = new CountDownLatch(2);
 
 	public void run() {
 		
@@ -59,10 +60,7 @@ public class SalaOnline extends Thread {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (BrokenBarrierException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 	}
 		
 
@@ -83,12 +81,8 @@ public class SalaOnline extends Thread {
 	public void anadirJugador(Socket c, Jugador w) {
 		this.jugadores.add(c);
 		this.partida.nuevo_jugador(w);
-		try {
-			this.barrera.await();
-		} catch (InterruptedException | BrokenBarrierException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		this.barrera.countDown();
 
 	}
 
