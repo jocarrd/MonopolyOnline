@@ -46,7 +46,7 @@ public class Cliente {
 				}
 				Partida jugar = seleccion.getPartida();
 				jugar.nuevo_jugador(jugador);
-				
+				 
 				
 				
 				salida.writeBytes("unir a partida" + "\r\n");
