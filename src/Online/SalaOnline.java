@@ -99,11 +99,11 @@ public class SalaOnline extends Thread {
 	}
 
 	public void Broadcast() {
-		ObjectOutputStream s;
+		
 		for (Socket d : this.jugadores) {
 
 			try {
-				s = new ObjectOutputStream(d.getOutputStream());
+				ObjectOutputStream s = new ObjectOutputStream(d.getOutputStream());
 				s.writeObject(partida);
 			} catch (Exception e1) {
 				e1.printStackTrace();
