@@ -57,8 +57,11 @@ public class Cliente {
 				ObjectOutputStream envioclases = new ObjectOutputStream(salida);
 				envioclases.writeObject(jugador);
 				envioclases.flush();
+				
+				
+				Partida definitiva = (Partida) s.readObject();
 
-				TableroCliente interfaz = new TableroCliente(jugar, jugador,servidor);
+				TableroCliente interfaz = new TableroCliente(definitiva, jugador,servidor);
 				
 				
 
