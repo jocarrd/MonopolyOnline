@@ -74,7 +74,7 @@ public class Servidor {
 							} else {
 
 								
-								Servidor.buscaSalaPartida(id_partida).anadirJugador(cliente, unir,obj);
+								Servidor.buscaSalaPartida(id_partida).anadirJugador(cliente, unir,obj,s);
 								System.out.println("Nuevo jugador");
 								System.out.println(Servidor.buscaSalaPartida(id_partida).getJugadores());
 								

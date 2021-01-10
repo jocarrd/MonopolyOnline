@@ -43,31 +43,33 @@ import java.awt.Font;
 public class TableroCliente extends JFrame {
 	private boolean esTurno;
 	private JPanel contentPane;
-	private Partida partida;
+	public Partida partida;
 	private Image v;
 	private Socket conexion;
 	private JTextField dinero;
-	private Jugador jugador;
+	private  Jugador jugador;
 	private List<Canvas> jugadores_ficha = new ArrayList<>();
 	private int click_dados;
 	private int click_comprar;
 	private MostrarPropiedades mp;
 	private ObjectInputStream ObjectIn;
 	private ObjectOutputStream ObjectOut;
+	private DataOutputStream datout;
 	
 
-	public TableroCliente(Partida c, Jugador j,Socket conexion) {
+	public TableroCliente(Partida c, Jugador j,Socket conexion,ObjectInputStream tt,ObjectOutputStream sal,DataOutputStream datout) {
 		this.conexion=conexion;
-		
-		System.out.println(j);
-		
+		this.ObjectIn=tt;
+		this.ObjectOut=sal;
+		this.datout=datout;
 		setTitle("Partida");
 		this.partida = c;
 		this.jugador = j;
 		this.click_dados = 0;
 		this.click_comprar = 0;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		System.out.println(this.partida.getJugadores());
+		
 		setBounds(100, 100, 1347, 959);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 180, 209));
@@ -163,11 +165,11 @@ public class TableroCliente extends JFrame {
 					click_dados--;
 					
 					try {
-						DataOutputStream str = new DataOutputStream(TableroCliente.this.conexion.getOutputStream());
-						str.writeBytes("pasoturno" +"\r\n");
 						
-						ObjectOutputStream s = new ObjectOutputStream(str);
-						s.writeObject(TableroCliente.this.partida);
+						TableroCliente.this.datout.writeBytes("pasoturno" +"\r\n");
+						
+						
+						TableroCliente.this.ObjectOut.writeObject(TableroCliente.this.partida);
 						
 						
 					} catch (IOException e1) {
@@ -420,11 +422,11 @@ public class TableroCliente extends JFrame {
 			public void run() {
 				try {
 					
-					ObjectInputStream s= new ObjectInputStream(TableroCliente.this.conexion.getInputStream());
+					
 					
 					while(true) {
 					
-					Partida d = (Partida) s.readObject();
+					Partida d = (Partida) TableroCliente.this.ObjectIn.readObject();
 					System.out.println(d);
 					for( Jugador c :d.getJugadores()) {
 						if(c.getNombre().equals(TableroCliente.this.jugador.getNombre()))

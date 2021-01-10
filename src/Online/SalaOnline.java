@@ -22,7 +22,7 @@ public class SalaOnline extends Thread {
 	private static int turno = 0;
 	private ArrayList<Socket> jugadores;
 	private ArrayList<ObjectOutputStream> salidas ;
-
+	private ArrayList<ObjectInputStream> entradas;
 	private CountDownLatch barrera = new CountDownLatch(2);
 
 	public void run() {
@@ -30,10 +30,14 @@ public class SalaOnline extends Thread {
 		
 		System.out.println("Esperando al menos 2 jugadores");
 		try {
+			this.partida.getJugadores();
 			this.barrera.await();
+			this.partida.getJugadores();
 			this.Broadcast();
 			
 			while (true) {
+				
+				
 				for(Socket d : jugadores) {
 					
 						DataInputStream ent = new DataInputStream(d.getInputStream());
@@ -42,8 +46,8 @@ public class SalaOnline extends Thread {
 						
 						if(lectura.equals("pasoturno")) {
 							System.out.println("Estoy aqui");
-							ObjectInputStream s = new ObjectInputStream(d.getInputStream());
-							Partida actualizada =(Partida) s.readObject();
+							
+							Partida actualizada =(Partida) this.entradas.get(jugadores.indexOf(d)).readObject();
 							this.partida=actualizada;
 							this.Broadcast();
 							System.out.println("El servidor notifica cambio de turno");
@@ -78,13 +82,15 @@ public class SalaOnline extends Thread {
 		this.partida = p;
 		this.jugadores = new ArrayList<>();
 		this.salidas= new ArrayList<>();
+		this.entradas= new ArrayList<>();
 
 	}
 
-	public void anadirJugador(Socket c, Jugador w,ObjectOutputStream sal) {
+	public void anadirJugador(Socket c, Jugador w,ObjectOutputStream sal,ObjectInputStream en) {
 		this.jugadores.add(c);
 		this.partida.nuevo_jugador(w);
 		this.salidas.add(sal);
+		this.entradas.add(en);
 		this.barrera.countDown();
 
 	}
@@ -106,7 +112,8 @@ public class SalaOnline extends Thread {
 		for (ObjectOutputStream s : this.salidas) {
 
 			try {
-				
+				System.out.println("Envio");
+				System.out.println(this.partida.getJugadores());
 				s.writeObject(partida);
 			} catch (Exception e1) {
 				e1.printStackTrace();
