@@ -24,7 +24,7 @@ public class Servidor {
 		try  {
 			ServerSocket c = new ServerSocket(7777);
 			System.out.println("Servidor en marcha");
-			ExecutorService sesiones = Executors.newCachedThreadPool();
+			
 			
 
 			SalaOnline v1 = new SalaOnline( new Partida("Partida 1"));

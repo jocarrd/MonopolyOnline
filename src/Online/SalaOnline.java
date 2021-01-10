@@ -80,7 +80,7 @@ public class SalaOnline extends Thread {
 
 	}
 
-	public void anadirJugador(Socket c, Jugador w, ObjectOutputStream sal, ObjectInputStream en) {
+	public synchronized  void anadirJugador(Socket c, Jugador w, ObjectOutputStream sal, ObjectInputStream en) {
 		this.jugadores.add(c);
 		this.partida.nuevo_jugador(w);
 		this.salidas.add(sal);
@@ -108,7 +108,7 @@ public class SalaOnline extends Thread {
 			try {
 				System.out.println("Envio");
 				System.out.println(this.partida.getJugadores());
-				s.writeObject(partida);
+				s.writeObject(this.getPartida());
 				s.flush();
 			} catch (Exception e1) {
 				e1.printStackTrace();
