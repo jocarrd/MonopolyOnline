@@ -17,8 +17,8 @@ public class Tablero implements Serializable {
 //	private Map<String,Integer> baraja_comunidad = new HashMap<>();
 //	private Map<String ,Integer> baraja_sorpresa = new HashMap<>();
 	
-	private static List<Integer> baraja_comunidad = new ArrayList<>();
-	private static List<Integer> baraja_sorpresa = new ArrayList<>();
+	private  List<Integer> baraja_comunidad = new ArrayList<>();
+	private  List<Integer> baraja_sorpresa = new ArrayList<>();
 
 	
 	
@@ -26,11 +26,11 @@ public class Tablero implements Serializable {
 		return this.casillas[c];
 	}
 	
-	public static List<Integer> getBarajaComunidad(){
+	public  List<Integer> getBarajaComunidad(){
 		return baraja_comunidad;
 	}
 	 
-	public static List<Integer> getBarajaSorpresa(){
+	public List<Integer> getBarajaSorpresa(){
 		return baraja_sorpresa;
 	}
 	
@@ -171,7 +171,7 @@ public class Tablero implements Serializable {
 
 		}
 			
-			
+		//System.out.println(this.casillas[i].getTipoCasilla());	
 	}
 
 }

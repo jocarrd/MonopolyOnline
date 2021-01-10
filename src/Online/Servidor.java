@@ -32,7 +32,7 @@ public class Servidor {
 			SalaOnline v3 = new SalaOnline( new Partida("Partida 3"));
 		
 			v1.start();
-			v2.start();
+			//v2.start();
 			//v3.start();
 			partidas.add(v1);
 			partidas.add(v2);

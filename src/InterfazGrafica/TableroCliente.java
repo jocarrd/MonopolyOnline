@@ -47,7 +47,7 @@ public class TableroCliente extends JFrame {
 	private Image v;
 	private Socket conexion;
 	private JTextField dinero;
-	private  Jugador jugador;
+	private Jugador jugador;
 	private List<Canvas> jugadores_ficha = new ArrayList<>();
 	private int click_dados;
 	private int click_comprar;
@@ -55,21 +55,20 @@ public class TableroCliente extends JFrame {
 	private ObjectInputStream ObjectIn;
 	private ObjectOutputStream ObjectOut;
 	private DataOutputStream datout;
-	
 
-	public TableroCliente(Partida c, Jugador j,Socket conexion,ObjectInputStream tt,ObjectOutputStream sal,DataOutputStream datout) {
-		this.conexion=conexion;
-		this.ObjectIn=tt;
-		this.ObjectOut=sal;
-		this.datout=datout;
+	public TableroCliente(Partida c, Jugador j, Socket conexion, ObjectInputStream tt, ObjectOutputStream sal,
+			DataOutputStream datout) {
+		this.conexion = conexion;
+		this.ObjectIn = tt;
+		this.ObjectOut = sal;
+		this.datout = datout;
 		setTitle("Partida");
 		this.partida = c;
 		this.jugador = j;
 		this.click_dados = 0;
 		this.click_comprar = 0;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		System.out.println(this.partida.getJugadores());
-		
+
 		setBounds(100, 100, 1347, 959);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(153, 180, 209));
@@ -126,11 +125,10 @@ public class TableroCliente extends JFrame {
 						Calle d = (Calle) partida.getTablero().getCasilla(jugador.getPosicion_tablero());
 						if (!d.TienePropietario()) {
 							jugador.anadir_propiedad(d);
-							
-							//mp.anyadirPropiedades(d.getNombre(), d.getPrecio_compra());
+
 							jugador.sacar_dinero(d.getPrecio_compra());
 							d.setPropietario(jugador);
-							//jugador.getMostProp().anyadirPropiedades(d.getNombre(), d.getPrecio_compra());
+
 							informacion.setText("Compra realizada");
 							dinero.setText(String.valueOf((Math.round(jugador.getDinero()))));
 							click_comprar++;
@@ -146,8 +144,7 @@ public class TableroCliente extends JFrame {
 				}
 			}
 		});
-		
-		
+
 		Comprar.setBounds(1080, 83, 89, 23);
 		contentPane.add(Comprar);
 
@@ -155,29 +152,25 @@ public class TableroCliente extends JFrame {
 		pasarTurno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List<Jugador> c = partida.getJugadores();
-				System.out.println("Turno de la partida" +partida.getTurno());	
+				System.out.println("Turno de la partida" + partida.getTurno());
 				System.out.println(c);
-				System.out.println("index"+c.indexOf(jugador));
+				System.out.println("index" + c.indexOf(jugador));
 				if (partida.getTurno() == c.indexOf(jugador)) {
 					partida.pasarTurno();
 					System.out.println(partida.getTurno());
 					informacion.setText(jugador.getNombre() + " ,has pasado de turno");
 					click_dados--;
-					
+
 					try {
-						
-						TableroCliente.this.datout.writeBytes("pasoturno" +"\r\n");
-						
-						
+
+						TableroCliente.this.datout.writeBytes("pasoturno" + "\r\n");
+
 						TableroCliente.this.ObjectOut.writeObject(TableroCliente.this.partida);
-						
-						
+
 					} catch (IOException e1) {
-						
+
 						e1.printStackTrace();
 					}
-					
-					
 
 				}
 
@@ -229,23 +222,34 @@ public class TableroCliente extends JFrame {
 																							// del jugador en la
 																							// interfaz
 					click_dados++;
-					
-					if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.comunidad)) {	
-						Comunidad com = (Comunidad) TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero());
-						int cantRand = getRandomElement(Tablero.getBarajaComunidad());
-						double dineroJugador = jugador.getDinero() + cantRand;
+
+					if (TableroCliente.this.partida.getTablero()
+							.getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla()
+							.equals(TipoCasilla.comunidad)) {
+						Comunidad com = (Comunidad) TableroCliente.this.partida.getTablero()
+								.getCasilla(TableroCliente.this.jugador.getPosicion_tablero());
+
+						int cantRand = getRandomElement(TableroCliente.this.partida.getTablero().getBarajaComunidad());
+						System.out.println("Cuanto devuelve " + cantRand);
+						double dineroJugador = jugador.getDinero() - cantRand;
 						MostrarCartaBaraja mcbc = new MostrarCartaBaraja(com.getNombre(), cantRand);
 						jugador.setDinero(dineroJugador);
+						dinero.setText(""+dineroJugador);
 					}
-					
-					if(TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla().equals(TipoCasilla.sorpresa)) {
-						Sorpresa sor = (Sorpresa) TableroCliente.this.partida.getTablero().getCasilla(TableroCliente.this.jugador.getPosicion_tablero());
-						int cantRand = getRandomElement(Tablero.getBarajaSorpresa());
+
+					if (TableroCliente.this.partida.getTablero()
+							.getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla()
+							.equals(TipoCasilla.sorpresa)) {
+						Sorpresa sor = (Sorpresa) TableroCliente.this.partida.getTablero()
+								.getCasilla(TableroCliente.this.jugador.getPosicion_tablero());
+						int cantRand = getRandomElement(TableroCliente.this.partida.getTablero().getBarajaSorpresa());
 						double dineroJugador = jugador.getDinero() + cantRand;
+						
 						MostrarCartaBaraja mcbs = new MostrarCartaBaraja(sor.getNombre(), cantRand);
 						jugador.setDinero(dineroJugador);
+						dinero.setText(""+dineroJugador);
 					}
-										 
+
 				}
 
 			}
@@ -260,18 +264,20 @@ public class TableroCliente extends JFrame {
 		label_1.setBounds(534, 591, 46, 14);
 		contentPane.add(label_1);
 		this.EscuhaPasoTurno();
-		
-		
+
 		this.setResizable(false);
 
 		this.setVisible(true);
 
 	}
-	
-	public int getRandomElement(List<Integer> list){ 
-        Random rand = new Random(); 
-        return list.get(rand.nextInt(list.size())); 
-    }
+
+	public int getRandomElement(List<Integer> list) {
+		System.out.println(list.size());
+		int d1 = (int) (Math.random() * (list.size()-1));
+
+		System.out.println("Funciona");
+		return list.get(d1);
+	}
 
 	public void DibujarFichaAvanza(int posicion, String nombre) {
 
@@ -403,81 +409,53 @@ public class TableroCliente extends JFrame {
 			}
 		}
 	}
-	
-	public void refreshFichas() {	
-		for(Jugador j : this.partida.getJugadores()) {
+
+	public void refreshFichas() {
+		for (Jugador j : this.partida.getJugadores()) {
 			DibujarFichaAvanza(j.getPosicion_tablero(), j.getNombre());
 		}
 	}
-	
-	
-	
+
 	public void EscuhaPasoTurno() {
-		
-		
-		
+
 		Thread turno = new Thread(new Runnable() {
 
-			
 			public void run() {
 				try {
-					
-					
-					
-					while(true) {
-					
-					Partida d = (Partida) TableroCliente.this.ObjectIn.readObject();
-					System.out.println(d);
-					for( Jugador c :d.getJugadores()) {
-						if(c.getNombre().equals(TableroCliente.this.jugador.getNombre()))
-						{
-							TableroCliente.this.jugador=c;
+
+					while (true) {
+
+						Partida d = (Partida) TableroCliente.this.ObjectIn.readObject();
+						System.out.println(d);
+						for (Jugador c : d.getJugadores()) {
+							if (c.getNombre().equals(TableroCliente.this.jugador.getNombre())) {
+								TableroCliente.this.jugador = c;
+							}
 						}
+
+						// comprobar si se han añadido nuevos jugadores y añadir al canvas
+
+						TableroCliente.this.partida = d;
+						System.out.println("Actualizacion" + partida.numero_jugadores());
+
+						System.out.println(TableroCliente.this.jugadores_ficha);
+						TableroCliente.this.refreshFichas();
+
 					}
-					
-					
-					//comprobar si se han añadido nuevos jugadores y añadir al canvas
-					
-					
-					
-					TableroCliente.this.partida=d; 
-					System.out.println("Actualizacion" + partida.numero_jugadores() );
-					
-					System.out.println(TableroCliente.this.jugadores_ficha);
-					TableroCliente.this.refreshFichas();
-					
-					
-					
-					
-					}
-					
-					
-					
+
 				} catch (IOException e) {
-					
+
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
-				
-				
+
 			}
-			
-			
+
 		});
-		
+
 		turno.start();
 	}
-	
-	
-	
-
-	
-							
-
-	
 
 }
