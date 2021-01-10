@@ -9,6 +9,7 @@ import Monopoly.TipoCasilla;
 import java.awt.BorderLayout;
 import java.util.List;
 
+//Interfaz grafica para mostrar el mensaje que contiene el texto de una carta
 public class MostrarCartaBaraja extends JFrame {
 	public MostrarCartaBaraja(String s, int n) {
 		setAutoRequestFocus(false);
@@ -19,6 +20,6 @@ public class MostrarCartaBaraja extends JFrame {
 		getContentPane().add(textArea, BorderLayout.CENTER);
 		textArea.setText(s + " " + n + "$" + "\r\n");
 		this.show();
-	}
+	} 
 
 }

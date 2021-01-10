@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
+//Interfaz grafica para mostrar una ventana de registro de un jugador para la partida
 public class RegistrarJugador extends JFrame {
 
 	private JPanel contentPane;

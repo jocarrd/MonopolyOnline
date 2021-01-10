@@ -17,6 +17,7 @@ import java.awt.SystemColor;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
+//Interfaz grafica para mostrar las tabla de propiedades de cada jugador
 public class MostrarPropiedades extends JFrame {
 	
 	Partida p;

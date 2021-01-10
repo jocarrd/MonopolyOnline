@@ -40,6 +40,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
 import java.awt.Font;
 
+//Esta es la interfaz grafica de el tablero donde se va a realizar el juego
 public class TableroCliente extends JFrame {
 	private boolean esTurno;
 	private JPanel contentPane;
@@ -76,6 +77,7 @@ public class TableroCliente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		int suma = 0;
+		//Se crea un canvas por cada jugador y lo pinta
 		for (int i = 0; i < this.partida.numero_jugadores(); i++) {
 			// Posicion inicial de los jugadores
 
@@ -96,7 +98,8 @@ public class TableroCliente extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(TableroCliente.class.getResource("/InterfazGrafica/monopoly.jpg")));
 		lblNewLabel.setBounds(77, -107, 774, 887);
 		contentPane.add(lblNewLabel);
-
+		
+		//Muestra el dinero del jugador actual
 		Label label = new Label("Dinero ");
 		label.setBounds(1136, 42, 39, 35);
 		contentPane.add(label);
@@ -113,7 +116,8 @@ public class TableroCliente extends JFrame {
 		informacion.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		informacion.setBounds(1123, 127, 187, 20);
 		contentPane.add(informacion);
-
+		
+		//Compra la propiedad de una casilla calle, en el caso de que se tenga dinero suficiente y no tenga ya un propietario
 		JButton Comprar = new JButton("Comprar");
 		Comprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -147,7 +151,8 @@ public class TableroCliente extends JFrame {
 
 		Comprar.setBounds(1080, 83, 89, 23);
 		contentPane.add(Comprar);
-
+		
+		//Se pasa de turno al siguiente jugador
 		JButton pasarTurno = new JButton("Pasar turno");
 		pasarTurno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -162,9 +167,9 @@ public class TableroCliente extends JFrame {
 					click_dados--;
 
 					try {
-
+						//notificamos al server que pasamos de turno
 						TableroCliente.this.datout.writeBytes("pasoturno" + "\r\n");
-
+						//le mandamos la partida al server para que tenga la actualizada
 						TableroCliente.this.ObjectOut.writeObject(TableroCliente.this.partida);
 
 					} catch (IOException e1) {
@@ -178,7 +183,8 @@ public class TableroCliente extends JFrame {
 		});
 		pasarTurno.setBounds(1191, 83, 119, 23);
 		contentPane.add(pasarTurno);
-
+		
+		//Muestra las propiedades que ha comprado el jugador
 		JButton btnNewButton = new JButton("Ver propiedades");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -204,7 +210,8 @@ public class TableroCliente extends JFrame {
 		dado2.setBackground(Color.WHITE);
 		dado2.setBounds(1231, 458, 89, 86);
 		contentPane.add(dado2);
-
+		
+		//Accion de lanzar los dados y mover ficha a la suma de los dos numeros
 		JButton btnNewButton_1 = new JButton("Lanzar Dados");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -222,7 +229,10 @@ public class TableroCliente extends JFrame {
 																							// del jugador en la
 																							// interfaz
 					click_dados++;
-
+					
+					//si se cae en una casilla de tipo "Comunidad", se saca una "carta aleatoria" del tipo Comunidad.
+					//Lo que sucede en este tipo de casilla es que el jugador debe a la comunidad una cantidad de dinero,
+					//esa cantidad es un numero de entre una lista de numeros,se le resta el numero de la "carta" que le ha salido.
 					if (TableroCliente.this.partida.getTablero()
 							.getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla()
 							.equals(TipoCasilla.comunidad)) {
@@ -236,7 +246,7 @@ public class TableroCliente extends JFrame {
 						jugador.setDinero(dineroJugador);
 						dinero.setText(""+dineroJugador);
 					}
-
+					//en este caso es lo mismo, pero en vez de Comunidad, es de sorpresa, y lo que hace es aÒadir dinero
 					if (TableroCliente.this.partida.getTablero()
 							.getCasilla(TableroCliente.this.jugador.getPosicion_tablero()).getTipoCasilla()
 							.equals(TipoCasilla.sorpresa)) {
@@ -263,7 +273,7 @@ public class TableroCliente extends JFrame {
 		JLabel label_1 = new JLabel("New label");
 		label_1.setBounds(534, 591, 46, 14);
 		contentPane.add(label_1);
-		this.EscuhaPasoTurno();
+		this.EscuchaPasoTurno();
 
 		this.setResizable(false);
 
@@ -271,6 +281,7 @@ public class TableroCliente extends JFrame {
 
 	}
 
+	//aqui se obtiene un elemento random de una lista que se pasa por par·metro
 	public int getRandomElement(List<Integer> list) {
 		System.out.println(list.size());
 		int d1 = (int) (Math.random() * (list.size()-1));
@@ -279,6 +290,7 @@ public class TableroCliente extends JFrame {
 		return list.get(d1);
 	}
 
+	//avanza la ficha a la posicion nueva, y la dibuja
 	public void DibujarFichaAvanza(int posicion, String nombre) {
 
 		for (Canvas c : this.jugadores_ficha) {
@@ -409,14 +421,17 @@ public class TableroCliente extends JFrame {
 			}
 		}
 	}
-
+	
+	//metodo que refresca la posicion de cada ficha, para cuando otro jugador necesita ver 
+	//los cambios de posicion de las fichas de otro jugador
 	public void refreshFichas() {
 		for (Jugador j : this.partida.getJugadores()) {
 			DibujarFichaAvanza(j.getPosicion_tablero(), j.getNombre());
 		}
 	}
 
-	public void EscuhaPasoTurno() {
+	//se crea un hilo que continua con la ejecucion de la partida hasta que se acabe
+	public void EscuchaPasoTurno() {
 
 		Thread turno = new Thread(new Runnable() {
 
@@ -433,7 +448,7 @@ public class TableroCliente extends JFrame {
 							}
 						}
 
-						// comprobar si se han a√±adido nuevos jugadores y a√±adir al canvas
+						// comprobar si se han aniadido nuevos jugadores y aniadir al canvas
 
 						TableroCliente.this.partida = d;
 						System.out.println("Actualizacion" + partida.numero_jugadores());

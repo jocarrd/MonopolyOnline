@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 
+//Interfaz grafica para seleccionar la partida a la que se quiere conectar el jugador
 public class SelecionPartida extends JFrame {
 
 	private JPanel contentPane;
@@ -87,6 +88,7 @@ public class SelecionPartida extends JFrame {
 		}
 
 		this.setVisible(true);
+		//Hilo para que parpadee el mensaje de bienvenida
 		Thread parpadeo = new Thread(new Runnable() {
 
 			@Override
