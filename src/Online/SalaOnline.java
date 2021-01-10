@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class SalaOnline extends Thread {
 	private Partida partida;
 	private static int turno = 0;
 	private ArrayList<Socket> jugadores;
+	private ArrayList<ObjectOutputStream> salidas ;
 
 	private CountDownLatch barrera = new CountDownLatch(2);
 
@@ -75,13 +77,14 @@ public class SalaOnline extends Thread {
 	public SalaOnline(Partida p) {
 		this.partida = p;
 		this.jugadores = new ArrayList<>();
+		this.salidas= new ArrayList<>();
 
 	}
 
-	public void anadirJugador(Socket c, Jugador w) {
+	public void anadirJugador(Socket c, Jugador w,ObjectOutputStream sal) {
 		this.jugadores.add(c);
 		this.partida.nuevo_jugador(w);
-		
+		this.salidas.add(sal);
 		this.barrera.countDown();
 
 	}
@@ -100,10 +103,10 @@ public class SalaOnline extends Thread {
 
 	public void Broadcast() {
 		
-		for (Socket d : this.jugadores) {
+		for (ObjectOutputStream s : this.salidas) {
 
 			try {
-				ObjectOutputStream s = new ObjectOutputStream(d.getOutputStream());
+				
 				s.writeObject(partida);
 			} catch (Exception e1) {
 				e1.printStackTrace();

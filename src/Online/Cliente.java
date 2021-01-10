@@ -21,7 +21,7 @@ public class Cliente {
 		DataOutputStream salida = null;
 		ObjectInputStream s = null;
 
-		try  {
+		try {
 			Socket servidor = new Socket("localhost", 7777);
 			salida = new DataOutputStream(servidor.getOutputStream());
 
@@ -33,37 +33,30 @@ public class Cliente {
 			try {
 				List<Partida> partidas = (List<Partida>) s.readObject();
 				registro = new RegistrarJugador();
-			
 
 				while (registro.isShowing()) {
-
+					System.out.println();
 				}
 				Jugador jugador = registro.getJugador(); // Jugador Registrado
 				SelecionPartida seleccion = new SelecionPartida(partidas);
 
 				while (seleccion.isShowing()) {
-
+					System.out.println();
 				}
 				Partida jugar = seleccion.getPartida();
 				jugar.nuevo_jugador(jugador);
-				 
-				
-				
+
 				salida.writeBytes("unir a partida" + "\r\n");
 				salida.writeBytes(jugar.getId() + "\r\n");
 				salida.flush();
-				
-				
+
 				ObjectOutputStream envioclases = new ObjectOutputStream(salida);
 				envioclases.writeObject(jugador);
 				envioclases.flush();
-				
-				
+
 				Partida definitiva = (Partida) s.readObject();
 
-				TableroCliente interfaz = new TableroCliente(definitiva, jugador,servidor);
-				
-				
+				TableroCliente interfaz = new TableroCliente(definitiva, jugador, servidor);
 
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
@@ -72,7 +65,7 @@ public class Cliente {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			
+
 		}
 
 	}

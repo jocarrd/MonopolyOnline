@@ -50,11 +50,11 @@ public class Servidor {
 					String evaluar = ent.readLine();
 					
 					
-					
+					ObjectOutputStream obj = null ;
 					if (evaluar.equals("inicio")) {
-						ObjectOutputStream s = new ObjectOutputStream(cliente.getOutputStream());
-						s.writeObject(Servidor.getPartidas());
-						s.flush();
+						obj=new ObjectOutputStream(cliente.getOutputStream());
+						obj.writeObject(Servidor.getPartidas());
+						obj.flush();
 						
 						evaluar = ent.readLine();
 					}
@@ -74,7 +74,7 @@ public class Servidor {
 							} else {
 
 								
-								Servidor.buscaSalaPartida(id_partida).anadirJugador(cliente, unir);
+								Servidor.buscaSalaPartida(id_partida).anadirJugador(cliente, unir,obj);
 								System.out.println("Nuevo jugador");
 								System.out.println(Servidor.buscaSalaPartida(id_partida).getJugadores());
 								
