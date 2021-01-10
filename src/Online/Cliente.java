@@ -57,14 +57,16 @@ public class Cliente {
 				
 				
 				
-				System.out.println("espero");
+				//Espera hasta que el servidor inicie la partida
 				s.readLine();
 				System.out.println("avanzo");
 				Partida definitiva = (Partida) s.readObject();
 				System.out.println(definitiva.getJugadores());
+				System.out.println(jugador);
 				System.out.println("avanzo2");
 				
 				TableroCliente interfaz = new TableroCliente(definitiva, jugador, servidor,s,envioclases,salida);
+				
 
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
