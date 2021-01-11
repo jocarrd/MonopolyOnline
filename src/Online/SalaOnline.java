@@ -37,21 +37,24 @@ public class SalaOnline extends Thread {
 			for (ObjectOutputStream lanza : this.salidas) {
 
 				lanza.writeBytes("empezamos" + "\r\n");
+				lanza.flush();
+				lanza.reset();
 			}
 
 			this.Broadcast();
 
 			while (true) {
 
-				for (Socket d : jugadores) {
+				for (ObjectInputStream d : entradas) {
 
-					DataInputStream ent = new DataInputStream(d.getInputStream());
+					//DataInputStream ent = new DataInputStream(d.getInputStream());
 
-					String lectura = ent.readLine();
+					String lectura = d.readLine();
 
 					if (lectura.equals("pasoturno")) {
 
-						Partida actualizada = (Partida) this.entradas.get(jugadores.indexOf(d)).readObject();
+						Partida actualizada = (Partida) d.readObject();
+								//this.entradas.get(jugadores.indexOf(d)).readObject();
 						this.partida = actualizada;
 						this.Broadcast();
 						System.out.println("El servidor notifica cambio de turno");
@@ -110,6 +113,7 @@ public class SalaOnline extends Thread {
 				System.out.println(this.partida.getJugadores());
 				s.writeObject(this.getPartida());
 				s.flush();
+				s.reset();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}

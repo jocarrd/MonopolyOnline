@@ -216,7 +216,8 @@ public class TableroCliente extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				List<Jugador> c = partida.getJugadores();
-
+				System.out.println("a;"+partida.getTurno());
+				System.out.println(c.indexOf(jugador));
 				if (partida.getTurno() == c.indexOf(jugador) && click_dados == 0) {
 
 					List<Integer> dados = partida.getDados();
