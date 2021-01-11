@@ -40,7 +40,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
 import java.awt.Font;
 
-//Esta es la interfaz grafica de el tablero donde se va a realizar el juego
+//Esta es la interfaz grafica de el tablero donde se va a realizar el juego, aqui es donde se juega la partida
 public class TableroCliente extends JFrame {
 	private boolean esTurno;
 	private JPanel contentPane;

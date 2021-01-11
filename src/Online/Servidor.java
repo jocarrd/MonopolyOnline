@@ -26,11 +26,13 @@ public class Servidor {
 			System.out.println("Servidor en marcha");
 			
 			
-
+			//diferentes salas donde van a existir partidas
 			SalaOnline v1 = new SalaOnline( new Partida("Partida 1"));
 			SalaOnline v2 = new SalaOnline( new Partida("Partida 2"));
 			SalaOnline v3 = new SalaOnline( new Partida("Partida 3"));
-		
+			
+			//aqui hemos comentado las otras dos, ya que para hacer las pruebas no usamos todas a la vez, y asi
+			//se carga mas rapido. Se pueden jugar varias partidas simultaneamente.
 			v1.start();
 			//v2.start();
 			//v3.start();
@@ -51,6 +53,9 @@ public class Servidor {
 					
 					
 					ObjectOutputStream obj = null ;
+					
+					//recibe el mensaje de inicio que envia el cliente, y le manda una lista con las 
+					//partidas disponibles
 					if (evaluar.equals("inicio")) {
 						obj=new ObjectOutputStream(cliente.getOutputStream());
 						obj.writeObject(Servidor.getPartidas());
@@ -59,6 +64,9 @@ public class Servidor {
 						evaluar = ent.readLine();
 					}
 
+					//despues de que el cliente haya elegido una partida, manda al server un mensaje de unir
+					//a partida, el server lo recibe y mete un nuevo jugador a la partida seleccionada, 
+					//siempre que haya espacio (hay numero max de jugadores)
 					if (evaluar.equals("unir a partida")) {
 						String id_partida = ent.readLine();
 						
@@ -100,7 +108,8 @@ public class Servidor {
 			e1.printStackTrace();
 		}
 	}
-
+	
+	//devuelve una partida de dentro de las salas online
 	public static Partida buscaPartida(String id) {
 
 		for (SalaOnline p : Servidor.partidas) {
@@ -113,6 +122,7 @@ public class Servidor {
 		return null;
 	}
 	
+	//devuelve la sala online de una partida
 	public static SalaOnline buscaSalaPartida(String id) {
 
 		for (SalaOnline p : Servidor.partidas) {
@@ -127,7 +137,7 @@ public class Servidor {
 	
 	
 	
-	
+	//devuelve una lista con todas las partidas
 	public static List<Partida> getPartidas(){
 		List<Partida> partidas = new ArrayList<>();
 		

@@ -17,11 +17,14 @@ import java.util.concurrent.Semaphore;
 import Monopoly.Jugador;
 import Monopoly.Partida;
 
+//Dado que el programa es multipartida, se crea una sala online para cada una de ellas, donde se alojan los jugadores
 public class SalaOnline extends Thread {
 	private Partida partida;
 	private ArrayList<Socket> jugadores;
 	private ArrayList<ObjectOutputStream> salidas;
 	private ArrayList<ObjectInputStream> entradas;
+	//creamos una barrera para que se vayan uniendo jugadores a la partida, y hasta que no estan todos
+	//no se empieza, en este caso, vamos a ser 2
 	private CountDownLatch barrera = new CountDownLatch(2);
 
 	public void run() {
@@ -33,18 +36,20 @@ public class SalaOnline extends Thread {
 			this.barrera.await();
 			System.out.println("despues");
 			System.out.println(this.partida.getJugadores());
-
+			
+			//manda a cada cliente el mensaje de que se empieza
 			for (ObjectOutputStream lanza : this.salidas) {
 
 				lanza.writeBytes("empezamos" + "\r\n");
 				lanza.flush();
 				lanza.reset();
 			}
-
+			//envia la partida actualizada a todos los jugadores
 			this.Broadcast();
 
 			while (true) {
-
+				//va leyendo los cambios de turno, que son notificados a esta clase desde TableroCliente
+				//para que actualice el estado de la partida y se la mande de nuevo a cada jugador
 				for (ObjectInputStream d : entradas) {
 
 					//DataInputStream ent = new DataInputStream(d.getInputStream());
@@ -74,7 +79,7 @@ public class SalaOnline extends Thread {
 			e.printStackTrace();
 		}
 	}
-
+	//constructor de la sala
 	public SalaOnline(Partida p) {
 		this.partida = p;
 		this.jugadores = new ArrayList<>();
@@ -82,7 +87,9 @@ public class SalaOnline extends Thread {
 		this.entradas = new ArrayList<>();
 
 	}
-
+	
+	//aniade un jugador a la partida, lo hemos hecho synchronized cuando buscabamos maneras de solucionar el error
+	//de que una partida tenia un jugador y la otra tenia dos
 	public synchronized  void anadirJugador(Socket c, Jugador w, ObjectOutputStream sal, ObjectInputStream en) {
 		this.jugadores.add(c);
 		this.partida.nuevo_jugador(w);
@@ -103,9 +110,11 @@ public class SalaOnline extends Thread {
 	public List<Socket> getJugadores() {
 		return jugadores;
 	}
-
+	
+	//manda a cada jugador la partida actualizada para que todos vean en todo momento las acciones 
+	//que han realizado los demas
 	public void Broadcast() {
-
+		//"salidas" es una lista de objectOutputStream, asi que cada uno hace referencia a un cliente
 		for (ObjectOutputStream s : this.salidas) {
 
 			try {
